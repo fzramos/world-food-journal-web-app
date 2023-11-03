@@ -1,0 +1,51 @@
+{
+  "name": "world-food-journal-web-app",
+  "version": "1.0.0",
+  "description": "Record your culinary experiences",
+  "main": "server/server.js",
+  "type": "module",
+  "scripts": {
+    "server": "cross-env NODE_ENV=development node server/server.js",
+    "start:server_dev": "cross-env NODE_ENV=development DEBUG=app:* nodemon server/app.js",
+    "client": "cd client && npm run dev",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fzramos/world-food-journal-web-app.git"
+  },
+  "author": "Fred Ramos",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fzramos/world-food-journal-web-app/issues"
+  },
+  "homepage": "https://github.com/fzramos/world-food-journal-web-app#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "compression": "^1.7.4",
+    "config": "^3.3.9",
+    "cookie": "^0.5.0",
+    "cookie-parser": "^1.4.6",
+    "custom-env": "^2.0.2",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^7.0.0",
+    "joi": "^17.9.1",
+    "joi-objectid": "^4.0.2",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "babel-jest": "^29.5.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.40.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0"
+  }
+}
