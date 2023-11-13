@@ -1,0 +1,2552 @@
+[
+    {
+        "name": "Aruba",
+        "code": "ABW",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Afghanistan",
+        "code": "AFG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Angola",
+        "code": "AGO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Anguilla",
+        "code": "AIA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Albania",
+        "code": "ALB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Aland",
+        "code": "ALA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Andorra",
+        "code": "AND",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "United Arab Emirates",
+        "code": "ARE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Argentina",
+        "code": "ARG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Armenia",
+        "code": "ARM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "American Samoa",
+        "code": "ASM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Antarctica",
+        "code": "ATA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ashmore and Cartier Islands",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "French Southern and Antarctic Lands",
+        "code": "ATF",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Antigua and Barbuda",
+        "code": "ATG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Australia",
+        "code": "AUS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Austria",
+        "code": "AUT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Azerbaijan",
+        "code": "AZE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Burundi",
+        "code": "BDI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Belgium",
+        "code": "BEL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Benin",
+        "code": "BEN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Burkina Faso",
+        "code": "BFA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bangladesh",
+        "code": "BGD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bulgaria",
+        "code": "BGR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bahrain",
+        "code": "BHR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "The Bahamas",
+        "code": "BHS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bosnia and Herzegovina",
+        "code": "BIH",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bajo Nuevo Bank (Petrel Is.)",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Barthelemy",
+        "code": "BLM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Belarus",
+        "code": "BLR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Belize",
+        "code": "BLZ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bermuda",
+        "code": "BMU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bolivia",
+        "code": "BOL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Brazil",
+        "code": "BRA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Barbados",
+        "code": "BRB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Brunei",
+        "code": "BRN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Bhutan",
+        "code": "BTN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Botswana",
+        "code": "BWA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Central African Republic",
+        "code": "CAF",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Canada",
+        "code": "CAN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Switzerland",
+        "code": "CHE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Chile",
+        "code": "CHL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "China",
+        "code": "CHN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ivory Coast",
+        "code": "CIV",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Clipperton Island",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cameroon",
+        "code": "CMR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cyprus No Mans Area",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Democratic Republic of the Congo",
+        "code": "COD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Republic of Congo",
+        "code": "COG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cook Islands",
+        "code": "COK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Colombia",
+        "code": "COL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Comoros",
+        "code": "COM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cape Verde",
+        "code": "CPV",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Costa Rica",
+        "code": "CRI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Coral Sea Islands",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cuba",
+        "code": "CUB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Curaçao",
+        "code": "CUW",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cayman Islands",
+        "code": "CYM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Northern Cyprus",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cyprus",
+        "code": "CYP",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Czech Republic",
+        "code": "CZE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Germany",
+        "code": "DEU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Djibouti",
+        "code": "DJI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Dominica",
+        "code": "DMA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Denmark",
+        "code": "DNK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Dominican Republic",
+        "code": "DOM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Algeria",
+        "code": "DZA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ecuador",
+        "code": "ECU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Egypt",
+        "code": "EGY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Eritrea",
+        "code": "ERI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Dhekelia Sovereign Base Area",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Spain",
+        "code": "ESP",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Estonia",
+        "code": "EST",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ethiopia",
+        "code": "ETH",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Finland",
+        "code": "FIN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Fiji",
+        "code": "FJI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Falkland Islands",
+        "code": "FLK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "France",
+        "code": "FRA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Faroe Islands",
+        "code": "FRO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Federated States of Micronesia",
+        "code": "FSM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Gabon",
+        "code": "GAB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "United Kingdom",
+        "code": "GBR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Georgia",
+        "code": "GEO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Guernsey",
+        "code": "GGY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ghana",
+        "code": "GHA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Gibraltar",
+        "code": "GIB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Guinea",
+        "code": "GIN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Gambia",
+        "code": "GMB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Guinea Bissau",
+        "code": "GNB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Equatorial Guinea",
+        "code": "GNQ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Greece",
+        "code": "GRC",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Grenada",
+        "code": "GRD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Greenland",
+        "code": "GRL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Guatemala",
+        "code": "GTM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Guam",
+        "code": "GUM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Guyana",
+        "code": "GUY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Hong Kong S.A.R.",
+        "code": "HKG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Heard Island and McDonald Islands",
+        "code": "HMD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Honduras",
+        "code": "HND",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Croatia",
+        "code": "HRV",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Haiti",
+        "code": "HTI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Hungary",
+        "code": "HUN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Indonesia",
+        "code": "IDN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Isle of Man",
+        "code": "IMN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "India",
+        "code": "IND",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Indian Ocean Territories",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "British Indian Ocean Territory",
+        "code": "IOT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ireland",
+        "code": "IRL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Iran",
+        "code": "IRN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Iraq",
+        "code": "IRQ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Iceland",
+        "code": "ISL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Israel",
+        "code": "ISR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Italy",
+        "code": "ITA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Jamaica",
+        "code": "JAM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Jersey",
+        "code": "JEY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Jordan",
+        "code": "JOR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Japan",
+        "code": "JPN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Baykonur Cosmodrome",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Siachen Glacier",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Kazakhstan",
+        "code": "KAZ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Kenya",
+        "code": "KEN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Kyrgyzstan",
+        "code": "KGZ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Cambodia",
+        "code": "KHM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Kiribati",
+        "code": "KIR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Kitts and Nevis",
+        "code": "KNA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "South Korea",
+        "code": "KOR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Kosovo",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Kuwait",
+        "code": "KWT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Laos",
+        "code": "LAO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Lebanon",
+        "code": "LBN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Liberia",
+        "code": "LBR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Libya",
+        "code": "LBY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Lucia",
+        "code": "LCA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Liechtenstein",
+        "code": "LIE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Sri Lanka",
+        "code": "LKA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Lesotho",
+        "code": "LSO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Lithuania",
+        "code": "LTU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Luxembourg",
+        "code": "LUX",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Latvia",
+        "code": "LVA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Macao S.A.R",
+        "code": "MAC",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Martin",
+        "code": "MAF",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Morocco",
+        "code": "MAR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Monaco",
+        "code": "MCO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Moldova",
+        "code": "MDA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Madagascar",
+        "code": "MDG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Maldives",
+        "code": "MDV",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Mexico",
+        "code": "MEX",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Marshall Islands",
+        "code": "MHL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Macedonia",
+        "code": "MKD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Mali",
+        "code": "MLI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Malta",
+        "code": "MLT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Myanmar",
+        "code": "MMR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Montenegro",
+        "code": "MNE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Mongolia",
+        "code": "MNG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Northern Mariana Islands",
+        "code": "MNP",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Mozambique",
+        "code": "MOZ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Mauritania",
+        "code": "MRT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Montserrat",
+        "code": "MSR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Mauritius",
+        "code": "MUS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Malawi",
+        "code": "MWI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Malaysia",
+        "code": "MYS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Namibia",
+        "code": "NAM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "New Caledonia",
+        "code": "NCL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Niger",
+        "code": "NER",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Norfolk Island",
+        "code": "NFK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Nigeria",
+        "code": "NGA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Nicaragua",
+        "code": "NIC",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Niue",
+        "code": "NIU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Netherlands",
+        "code": "NLD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Norway",
+        "code": "NOR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Nepal",
+        "code": "NPL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Nauru",
+        "code": "NRU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "New Zealand",
+        "code": "NZL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Oman",
+        "code": "OMN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Pakistan",
+        "code": "PAK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Panama",
+        "code": "PAN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Pitcairn Islands",
+        "code": "PCN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Peru",
+        "code": "PER",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Spratly Islands",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Philippines",
+        "code": "PHL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Palau",
+        "code": "PLW",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Papua New Guinea",
+        "code": "PNG",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Poland",
+        "code": "POL",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Puerto Rico",
+        "code": "PRI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "North Korea",
+        "code": "PRK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Portugal",
+        "code": "PRT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Paraguay",
+        "code": "PRY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Palestine",
+        "code": "PSE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "French Polynesia",
+        "code": "PYF",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Qatar",
+        "code": "QAT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Romania",
+        "code": "ROU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Russia",
+        "code": "RUS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Rwanda",
+        "code": "RWA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Western Sahara",
+        "code": "ESH",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saudi Arabia",
+        "code": "SAU",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Scarborough Reef",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Sudan",
+        "code": "SDN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "South Sudan",
+        "code": "SSD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Senegal",
+        "code": "SEN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Serranilla Bank",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Singapore",
+        "code": "SGP",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "South Georgia and South Sandwich Islands",
+        "code": "SGS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Helena",
+        "code": "SHN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Solomon Islands",
+        "code": "SLB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Sierra Leone",
+        "code": "SLE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "El Salvador",
+        "code": "SLV",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "San Marino",
+        "code": "SMR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Somaliland",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Somalia",
+        "code": "SOM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Pierre and Miquelon",
+        "code": "SPM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Republic of Serbia",
+        "code": "SRB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Sao Tome and Principe",
+        "code": "STP",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Suriname",
+        "code": "SUR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Slovakia",
+        "code": "SVK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Slovenia",
+        "code": "SVN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Sweden",
+        "code": "SWE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Swaziland",
+        "code": "SWZ",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Sint Maarten",
+        "code": "SXM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Seychelles",
+        "code": "SYC",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Syria",
+        "code": "SYR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Turks and Caicos Islands",
+        "code": "TCA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Chad",
+        "code": "TCD",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Togo",
+        "code": "TGO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Thailand",
+        "code": "THA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Tajikistan",
+        "code": "TJK",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Turkmenistan",
+        "code": "TKM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "East Timor",
+        "code": "TLS",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Tonga",
+        "code": "TON",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Trinidad and Tobago",
+        "code": "TTO",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Tunisia",
+        "code": "TUN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Turkey",
+        "code": "TUR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Tuvalu",
+        "code": "TUV",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Taiwan",
+        "code": "TWN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "United Republic of Tanzania",
+        "code": "TZA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Uganda",
+        "code": "UGA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Ukraine",
+        "code": "UKR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "United States Minor Outlying Islands",
+        "code": "UMI",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Uruguay",
+        "code": "URY",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "United States of America",
+        "code": "USA",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "US Naval Base Guantanamo Bay",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Uzbekistan",
+        "code": "UZB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Vatican",
+        "code": "VAT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Saint Vincent and the Grenadines",
+        "code": "VCT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Venezuela",
+        "code": "VEN",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "British Virgin Islands",
+        "code": "VGB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "United States Virgin Islands",
+        "code": "VIR",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Vietnam",
+        "code": "VNM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Vanuatu",
+        "code": "VUT",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Wallis and Futuna",
+        "code": "WLF",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Akrotiri Sovereign Base Area",
+        "code": "-99",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Samoa",
+        "code": "WSM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Yemen",
+        "code": "YEM",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "South Africa",
+        "code": "ZAF",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Zambia",
+        "code": "ZMB",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    },
+    {
+        "name": "Zimbabwe",
+        "code": "ZWE",
+        "cnts": {
+            "restr": 0,
+            "hm": 0,
+            "misc": 0,
+            "wlist": 0
+        }
+    }
+]
