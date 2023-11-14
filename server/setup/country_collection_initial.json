@@ -1,2552 +1,1022 @@
 [
     {
         "name": "Aruba",
-        "code": "ABW",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ABW"
     },
     {
         "name": "Afghanistan",
-        "code": "AFG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AFG"
     },
     {
         "name": "Angola",
-        "code": "AGO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AGO"
     },
     {
         "name": "Anguilla",
-        "code": "AIA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AIA"
     },
     {
         "name": "Albania",
-        "code": "ALB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ALB"
     },
     {
         "name": "Aland",
-        "code": "ALA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ALA"
     },
     {
         "name": "Andorra",
-        "code": "AND",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AND"
     },
     {
         "name": "United Arab Emirates",
-        "code": "ARE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ARE"
     },
     {
         "name": "Argentina",
-        "code": "ARG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ARG"
     },
     {
         "name": "Armenia",
-        "code": "ARM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ARM"
     },
     {
         "name": "American Samoa",
-        "code": "ASM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ASM"
     },
     {
         "name": "Antarctica",
-        "code": "ATA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ATA"
     },
     {
         "name": "Ashmore and Cartier Islands",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "French Southern and Antarctic Lands",
-        "code": "ATF",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ATF"
     },
     {
         "name": "Antigua and Barbuda",
-        "code": "ATG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ATG"
     },
     {
         "name": "Australia",
-        "code": "AUS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AUS"
     },
     {
         "name": "Austria",
-        "code": "AUT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AUT"
     },
     {
         "name": "Azerbaijan",
-        "code": "AZE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "AZE"
     },
     {
         "name": "Burundi",
-        "code": "BDI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BDI"
     },
     {
         "name": "Belgium",
-        "code": "BEL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BEL"
     },
     {
         "name": "Benin",
-        "code": "BEN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BEN"
     },
     {
         "name": "Burkina Faso",
-        "code": "BFA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BFA"
     },
     {
         "name": "Bangladesh",
-        "code": "BGD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BGD"
     },
     {
         "name": "Bulgaria",
-        "code": "BGR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BGR"
     },
     {
         "name": "Bahrain",
-        "code": "BHR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BHR"
     },
     {
         "name": "The Bahamas",
-        "code": "BHS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BHS"
     },
     {
         "name": "Bosnia and Herzegovina",
-        "code": "BIH",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BIH"
     },
     {
         "name": "Bajo Nuevo Bank (Petrel Is.)",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Saint Barthelemy",
-        "code": "BLM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BLM"
     },
     {
         "name": "Belarus",
-        "code": "BLR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BLR"
     },
     {
         "name": "Belize",
-        "code": "BLZ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BLZ"
     },
     {
         "name": "Bermuda",
-        "code": "BMU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BMU"
     },
     {
         "name": "Bolivia",
-        "code": "BOL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BOL"
     },
     {
         "name": "Brazil",
-        "code": "BRA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BRA"
     },
     {
         "name": "Barbados",
-        "code": "BRB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BRB"
     },
     {
         "name": "Brunei",
-        "code": "BRN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BRN"
     },
     {
         "name": "Bhutan",
-        "code": "BTN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BTN"
     },
     {
         "name": "Botswana",
-        "code": "BWA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "BWA"
     },
     {
         "name": "Central African Republic",
-        "code": "CAF",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CAF"
     },
     {
         "name": "Canada",
-        "code": "CAN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CAN"
     },
     {
         "name": "Switzerland",
-        "code": "CHE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CHE"
     },
     {
         "name": "Chile",
-        "code": "CHL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CHL"
     },
     {
         "name": "China",
-        "code": "CHN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CHN"
     },
     {
         "name": "Ivory Coast",
-        "code": "CIV",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CIV"
     },
     {
         "name": "Clipperton Island",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Cameroon",
-        "code": "CMR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CMR"
     },
     {
         "name": "Cyprus No Mans Area",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Democratic Republic of the Congo",
-        "code": "COD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "COD"
     },
     {
         "name": "Republic of Congo",
-        "code": "COG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "COG"
     },
     {
         "name": "Cook Islands",
-        "code": "COK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "COK"
     },
     {
         "name": "Colombia",
-        "code": "COL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "COL"
     },
     {
         "name": "Comoros",
-        "code": "COM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "COM"
     },
     {
         "name": "Cape Verde",
-        "code": "CPV",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CPV"
     },
     {
         "name": "Costa Rica",
-        "code": "CRI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CRI"
     },
     {
         "name": "Coral Sea Islands",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Cuba",
-        "code": "CUB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CUB"
     },
     {
         "name": "Curaçao",
-        "code": "CUW",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CUW"
     },
     {
         "name": "Cayman Islands",
-        "code": "CYM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CYM"
     },
     {
         "name": "Northern Cyprus",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Cyprus",
-        "code": "CYP",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CYP"
     },
     {
         "name": "Czech Republic",
-        "code": "CZE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "CZE"
     },
     {
         "name": "Germany",
-        "code": "DEU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "DEU"
     },
     {
         "name": "Djibouti",
-        "code": "DJI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "DJI"
     },
     {
         "name": "Dominica",
-        "code": "DMA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "DMA"
     },
     {
         "name": "Denmark",
-        "code": "DNK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "DNK"
     },
     {
         "name": "Dominican Republic",
-        "code": "DOM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "DOM"
     },
     {
         "name": "Algeria",
-        "code": "DZA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "DZA"
     },
     {
         "name": "Ecuador",
-        "code": "ECU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ECU"
     },
     {
         "name": "Egypt",
-        "code": "EGY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "EGY"
     },
     {
         "name": "Eritrea",
-        "code": "ERI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ERI"
     },
     {
         "name": "Dhekelia Sovereign Base Area",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Spain",
-        "code": "ESP",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ESP"
     },
     {
         "name": "Estonia",
-        "code": "EST",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "EST"
     },
     {
         "name": "Ethiopia",
-        "code": "ETH",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ETH"
     },
     {
         "name": "Finland",
-        "code": "FIN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "FIN"
     },
     {
         "name": "Fiji",
-        "code": "FJI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "FJI"
     },
     {
         "name": "Falkland Islands",
-        "code": "FLK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "FLK"
     },
     {
         "name": "France",
-        "code": "FRA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "FRA"
     },
     {
         "name": "Faroe Islands",
-        "code": "FRO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "FRO"
     },
     {
         "name": "Federated States of Micronesia",
-        "code": "FSM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "FSM"
     },
     {
         "name": "Gabon",
-        "code": "GAB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GAB"
     },
     {
         "name": "United Kingdom",
-        "code": "GBR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GBR"
     },
     {
         "name": "Georgia",
-        "code": "GEO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GEO"
     },
     {
         "name": "Guernsey",
-        "code": "GGY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GGY"
     },
     {
         "name": "Ghana",
-        "code": "GHA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GHA"
     },
     {
         "name": "Gibraltar",
-        "code": "GIB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GIB"
     },
     {
         "name": "Guinea",
-        "code": "GIN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GIN"
     },
     {
         "name": "Gambia",
-        "code": "GMB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GMB"
     },
     {
         "name": "Guinea Bissau",
-        "code": "GNB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GNB"
     },
     {
         "name": "Equatorial Guinea",
-        "code": "GNQ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GNQ"
     },
     {
         "name": "Greece",
-        "code": "GRC",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GRC"
     },
     {
         "name": "Grenada",
-        "code": "GRD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GRD"
     },
     {
         "name": "Greenland",
-        "code": "GRL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GRL"
     },
     {
         "name": "Guatemala",
-        "code": "GTM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GTM"
     },
     {
         "name": "Guam",
-        "code": "GUM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GUM"
     },
     {
         "name": "Guyana",
-        "code": "GUY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "GUY"
     },
     {
         "name": "Hong Kong S.A.R.",
-        "code": "HKG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "HKG"
     },
     {
         "name": "Heard Island and McDonald Islands",
-        "code": "HMD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "HMD"
     },
     {
         "name": "Honduras",
-        "code": "HND",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "HND"
     },
     {
         "name": "Croatia",
-        "code": "HRV",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "HRV"
     },
     {
         "name": "Haiti",
-        "code": "HTI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "HTI"
     },
     {
         "name": "Hungary",
-        "code": "HUN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "HUN"
     },
     {
         "name": "Indonesia",
-        "code": "IDN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IDN"
     },
     {
         "name": "Isle of Man",
-        "code": "IMN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IMN"
     },
     {
         "name": "India",
-        "code": "IND",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IND"
     },
     {
         "name": "Indian Ocean Territories",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "British Indian Ocean Territory",
-        "code": "IOT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IOT"
     },
     {
         "name": "Ireland",
-        "code": "IRL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IRL"
     },
     {
         "name": "Iran",
-        "code": "IRN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IRN"
     },
     {
         "name": "Iraq",
-        "code": "IRQ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "IRQ"
     },
     {
         "name": "Iceland",
-        "code": "ISL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ISL"
     },
     {
         "name": "Israel",
-        "code": "ISR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ISR"
     },
     {
         "name": "Italy",
-        "code": "ITA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ITA"
     },
     {
         "name": "Jamaica",
-        "code": "JAM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "JAM"
     },
     {
         "name": "Jersey",
-        "code": "JEY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "JEY"
     },
     {
         "name": "Jordan",
-        "code": "JOR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "JOR"
     },
     {
         "name": "Japan",
-        "code": "JPN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "JPN"
     },
     {
         "name": "Baykonur Cosmodrome",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Siachen Glacier",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Kazakhstan",
-        "code": "KAZ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KAZ"
     },
     {
         "name": "Kenya",
-        "code": "KEN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KEN"
     },
     {
         "name": "Kyrgyzstan",
-        "code": "KGZ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KGZ"
     },
     {
         "name": "Cambodia",
-        "code": "KHM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KHM"
     },
     {
         "name": "Kiribati",
-        "code": "KIR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KIR"
     },
     {
         "name": "Saint Kitts and Nevis",
-        "code": "KNA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KNA"
     },
     {
         "name": "South Korea",
-        "code": "KOR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KOR"
     },
     {
         "name": "Kosovo",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Kuwait",
-        "code": "KWT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "KWT"
     },
     {
         "name": "Laos",
-        "code": "LAO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LAO"
     },
     {
         "name": "Lebanon",
-        "code": "LBN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LBN"
     },
     {
         "name": "Liberia",
-        "code": "LBR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LBR"
     },
     {
         "name": "Libya",
-        "code": "LBY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LBY"
     },
     {
         "name": "Saint Lucia",
-        "code": "LCA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LCA"
     },
     {
         "name": "Liechtenstein",
-        "code": "LIE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LIE"
     },
     {
         "name": "Sri Lanka",
-        "code": "LKA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LKA"
     },
     {
         "name": "Lesotho",
-        "code": "LSO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LSO"
     },
     {
         "name": "Lithuania",
-        "code": "LTU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LTU"
     },
     {
         "name": "Luxembourg",
-        "code": "LUX",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LUX"
     },
     {
         "name": "Latvia",
-        "code": "LVA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "LVA"
     },
     {
         "name": "Macao S.A.R",
-        "code": "MAC",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MAC"
     },
     {
         "name": "Saint Martin",
-        "code": "MAF",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MAF"
     },
     {
         "name": "Morocco",
-        "code": "MAR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MAR"
     },
     {
         "name": "Monaco",
-        "code": "MCO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MCO"
     },
     {
         "name": "Moldova",
-        "code": "MDA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MDA"
     },
     {
         "name": "Madagascar",
-        "code": "MDG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MDG"
     },
     {
         "name": "Maldives",
-        "code": "MDV",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MDV"
     },
     {
         "name": "Mexico",
-        "code": "MEX",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MEX"
     },
     {
         "name": "Marshall Islands",
-        "code": "MHL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MHL"
     },
     {
         "name": "Macedonia",
-        "code": "MKD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MKD"
     },
     {
         "name": "Mali",
-        "code": "MLI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MLI"
     },
     {
         "name": "Malta",
-        "code": "MLT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MLT"
     },
     {
         "name": "Myanmar",
-        "code": "MMR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MMR"
     },
     {
         "name": "Montenegro",
-        "code": "MNE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MNE"
     },
     {
         "name": "Mongolia",
-        "code": "MNG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MNG"
     },
     {
         "name": "Northern Mariana Islands",
-        "code": "MNP",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MNP"
     },
     {
         "name": "Mozambique",
-        "code": "MOZ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MOZ"
     },
     {
         "name": "Mauritania",
-        "code": "MRT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MRT"
     },
     {
         "name": "Montserrat",
-        "code": "MSR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MSR"
     },
     {
         "name": "Mauritius",
-        "code": "MUS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MUS"
     },
     {
         "name": "Malawi",
-        "code": "MWI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MWI"
     },
     {
         "name": "Malaysia",
-        "code": "MYS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "MYS"
     },
     {
         "name": "Namibia",
-        "code": "NAM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NAM"
     },
     {
         "name": "New Caledonia",
-        "code": "NCL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NCL"
     },
     {
         "name": "Niger",
-        "code": "NER",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NER"
     },
     {
         "name": "Norfolk Island",
-        "code": "NFK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NFK"
     },
     {
         "name": "Nigeria",
-        "code": "NGA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NGA"
     },
     {
         "name": "Nicaragua",
-        "code": "NIC",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NIC"
     },
     {
         "name": "Niue",
-        "code": "NIU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NIU"
     },
     {
         "name": "Netherlands",
-        "code": "NLD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NLD"
     },
     {
         "name": "Norway",
-        "code": "NOR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NOR"
     },
     {
         "name": "Nepal",
-        "code": "NPL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NPL"
     },
     {
         "name": "Nauru",
-        "code": "NRU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NRU"
     },
     {
         "name": "New Zealand",
-        "code": "NZL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "NZL"
     },
     {
         "name": "Oman",
-        "code": "OMN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "OMN"
     },
     {
         "name": "Pakistan",
-        "code": "PAK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PAK"
     },
     {
         "name": "Panama",
-        "code": "PAN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PAN"
     },
     {
         "name": "Pitcairn Islands",
-        "code": "PCN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PCN"
     },
     {
         "name": "Peru",
-        "code": "PER",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PER"
     },
     {
         "name": "Spratly Islands",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Philippines",
-        "code": "PHL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PHL"
     },
     {
         "name": "Palau",
-        "code": "PLW",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PLW"
     },
     {
         "name": "Papua New Guinea",
-        "code": "PNG",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PNG"
     },
     {
         "name": "Poland",
-        "code": "POL",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "POL"
     },
     {
         "name": "Puerto Rico",
-        "code": "PRI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PRI"
     },
     {
         "name": "North Korea",
-        "code": "PRK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PRK"
     },
     {
         "name": "Portugal",
-        "code": "PRT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PRT"
     },
     {
         "name": "Paraguay",
-        "code": "PRY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PRY"
     },
     {
         "name": "Palestine",
-        "code": "PSE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PSE"
     },
     {
         "name": "French Polynesia",
-        "code": "PYF",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "PYF"
     },
     {
         "name": "Qatar",
-        "code": "QAT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "QAT"
     },
     {
         "name": "Romania",
-        "code": "ROU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ROU"
     },
     {
         "name": "Russia",
-        "code": "RUS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "RUS"
     },
     {
         "name": "Rwanda",
-        "code": "RWA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "RWA"
     },
     {
         "name": "Western Sahara",
-        "code": "ESH",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ESH"
     },
     {
         "name": "Saudi Arabia",
-        "code": "SAU",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SAU"
     },
     {
         "name": "Scarborough Reef",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Sudan",
-        "code": "SDN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SDN"
     },
     {
         "name": "South Sudan",
-        "code": "SSD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SSD"
     },
     {
         "name": "Senegal",
-        "code": "SEN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SEN"
     },
     {
         "name": "Serranilla Bank",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Singapore",
-        "code": "SGP",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SGP"
     },
     {
         "name": "South Georgia and South Sandwich Islands",
-        "code": "SGS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SGS"
     },
     {
         "name": "Saint Helena",
-        "code": "SHN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SHN"
     },
     {
         "name": "Solomon Islands",
-        "code": "SLB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SLB"
     },
     {
         "name": "Sierra Leone",
-        "code": "SLE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SLE"
     },
     {
         "name": "El Salvador",
-        "code": "SLV",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SLV"
     },
     {
         "name": "San Marino",
-        "code": "SMR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SMR"
     },
     {
         "name": "Somaliland",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Somalia",
-        "code": "SOM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SOM"
     },
     {
         "name": "Saint Pierre and Miquelon",
-        "code": "SPM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SPM"
     },
     {
         "name": "Republic of Serbia",
-        "code": "SRB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SRB"
     },
     {
         "name": "Sao Tome and Principe",
-        "code": "STP",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "STP"
     },
     {
         "name": "Suriname",
-        "code": "SUR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SUR"
     },
     {
         "name": "Slovakia",
-        "code": "SVK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SVK"
     },
     {
         "name": "Slovenia",
-        "code": "SVN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SVN"
     },
     {
         "name": "Sweden",
-        "code": "SWE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SWE"
     },
     {
         "name": "Swaziland",
-        "code": "SWZ",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SWZ"
     },
     {
         "name": "Sint Maarten",
-        "code": "SXM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SXM"
     },
     {
         "name": "Seychelles",
-        "code": "SYC",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SYC"
     },
     {
         "name": "Syria",
-        "code": "SYR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "SYR"
     },
     {
         "name": "Turks and Caicos Islands",
-        "code": "TCA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TCA"
     },
     {
         "name": "Chad",
-        "code": "TCD",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TCD"
     },
     {
         "name": "Togo",
-        "code": "TGO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TGO"
     },
     {
         "name": "Thailand",
-        "code": "THA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "THA"
     },
     {
         "name": "Tajikistan",
-        "code": "TJK",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TJK"
     },
     {
         "name": "Turkmenistan",
-        "code": "TKM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TKM"
     },
     {
         "name": "East Timor",
-        "code": "TLS",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TLS"
     },
     {
         "name": "Tonga",
-        "code": "TON",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TON"
     },
     {
         "name": "Trinidad and Tobago",
-        "code": "TTO",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TTO"
     },
     {
         "name": "Tunisia",
-        "code": "TUN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TUN"
     },
     {
         "name": "Turkey",
-        "code": "TUR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TUR"
     },
     {
         "name": "Tuvalu",
-        "code": "TUV",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TUV"
     },
     {
         "name": "Taiwan",
-        "code": "TWN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TWN"
     },
     {
         "name": "United Republic of Tanzania",
-        "code": "TZA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "TZA"
     },
     {
         "name": "Uganda",
-        "code": "UGA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "UGA"
     },
     {
         "name": "Ukraine",
-        "code": "UKR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "UKR"
     },
     {
         "name": "United States Minor Outlying Islands",
-        "code": "UMI",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "UMI"
     },
     {
         "name": "Uruguay",
-        "code": "URY",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "URY"
     },
     {
         "name": "United States of America",
-        "code": "USA",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "USA"
     },
     {
         "name": "US Naval Base Guantanamo Bay",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Uzbekistan",
-        "code": "UZB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "UZB"
     },
     {
         "name": "Vatican",
-        "code": "VAT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VAT"
     },
     {
         "name": "Saint Vincent and the Grenadines",
-        "code": "VCT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VCT"
     },
     {
         "name": "Venezuela",
-        "code": "VEN",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VEN"
     },
     {
         "name": "British Virgin Islands",
-        "code": "VGB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VGB"
     },
     {
         "name": "United States Virgin Islands",
-        "code": "VIR",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VIR"
     },
     {
         "name": "Vietnam",
-        "code": "VNM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VNM"
     },
     {
         "name": "Vanuatu",
-        "code": "VUT",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "VUT"
     },
     {
         "name": "Wallis and Futuna",
-        "code": "WLF",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "WLF"
     },
     {
         "name": "Akrotiri Sovereign Base Area",
-        "code": "-99",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "-99"
     },
     {
         "name": "Samoa",
-        "code": "WSM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "WSM"
     },
     {
         "name": "Yemen",
-        "code": "YEM",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "YEM"
     },
     {
         "name": "South Africa",
-        "code": "ZAF",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ZAF"
     },
     {
         "name": "Zambia",
-        "code": "ZMB",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ZMB"
     },
     {
         "name": "Zimbabwe",
-        "code": "ZWE",
-        "cnts": {
-            "restr": 0,
-            "hm": 0,
-            "misc": 0,
-            "wlist": 0
-        }
+        "code": "ZWE"
     }
 ]

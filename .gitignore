@@ -23,6 +23,9 @@ client/node_modules/
 .env.production.local
 client/src/assets/countriesgeo.json
 DEV_NOTES.md
+mongotest.cjs
+clean_countries_geojson.py
+country_collection_initial OLD.json
 
 npm-debug.log*
 yarn-debug.log*

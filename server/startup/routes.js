@@ -2,7 +2,8 @@ import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import winston from 'winston'
-import restaurant from '../routes/restaurant'
+import restaurants from '../routes/restaurants'
+import countryCounts from '../routes/countryCounts'
 import error from '../middleware/error'
 
 export default function (app) {
@@ -15,7 +16,8 @@ export default function (app) {
         winston.info('Morgan activated')
     }
 
-    app.use('/api/restaurant', restaurant)
+    app.use('/api/restaurants', restaurants)
+    app.use('/api/country-counts', countryCounts)
 
     app.use(error)
 }
