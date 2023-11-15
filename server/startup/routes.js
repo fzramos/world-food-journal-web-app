@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import winston from 'winston'
 import restaurants from '../routes/restaurants'
 import countryCounts from '../routes/countryCounts'
+import users from '../routes/users'
 import error from '../middleware/error'
 
 export default function (app) {
@@ -18,6 +19,7 @@ export default function (app) {
 
     app.use('/api/restaurants', restaurants)
     app.use('/api/country-counts', countryCounts)
+    app.use('/api/users', users)
 
     app.use(error)
 }
