@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
 import Joi from 'joi'
 import { joiPasswordExtendCore } from 'joi-password'
+const joiPassword = Joi.extend(joiPasswordExtendCore);
 import jwt from 'jsonwebtoken'
 import config from 'config'
+import winston from "winston";
+import 'dotenv/config'
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -35,7 +38,7 @@ userSchema.methods.generateAuthToken = function () {
     return jwt.sign({
         _id: this._id,
         adminStatus: this.adminStatus
-    }), config.get('jwtPrivateKey')
+    }, process.env.WFJ_jwtPrivateKey)
 }
 
 const User = mongoose.model('User', userSchema)
@@ -52,9 +55,15 @@ const validateUserAsync = async (user) => {
             .minOfLowercase(1)
             .minOfUppercase(1)
             .required(),
-        repeat_password: Joi.ref('password') 
+        repeat_password: joiPassword.string()
+            .noWhiteSpaces()
+            .minOfSpecialCharacters(1)
+            .minOfLowercase(1)
+            .minOfUppercase(1)
+            .required()
     })
-    return await schema.validateAsync(user)
+    // returning a promise
+    return schema.validateAsync(user)
 }
 
 module.exports = {

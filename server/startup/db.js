@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
-import * as dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 import winston from 'winston'
 import config from 'config'
 
