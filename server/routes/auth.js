@@ -5,6 +5,7 @@ import Joi from 'joi'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import winston from 'winston'
+import { serialize } from 'cookie'
 
 // check if login request nameOrEmail value is in the format of an email
 const isEmail = (str) => {
@@ -37,8 +38,21 @@ router.post('/', async (req, res) => {
 
     if (!matchingPassword) return res.status(400).send(`Username/email and/or password were invalid.`)
 
+    const token = user.generateAuthToken()
+
+    // React client will use HTTPS only cookie for API route auth
+    // need this route to also set a HTTPS only cookie
+    const serialized = serialize('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 24 * 30, // long token age for now
+        path: '/'
+    })
+    res.setHeader('Set-Header', serialized)
+
     // valid credentials, send JWT
-    res.send(user.generateAuthToken())
+    res.send(token)
 })
 
 // if API parameters are missing or invalid in their format, don't bother
