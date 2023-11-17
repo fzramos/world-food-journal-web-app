@@ -6,6 +6,7 @@ import restaurants from '../routes/restaurants'
 import countryCounts from '../routes/countryCounts'
 import users from '../routes/user'
 import auth from '../routes/auth'
+import logout from '../routes/logout'
 import error from '../middleware/error'
 
 export default function (app) {
@@ -23,6 +24,7 @@ export default function (app) {
     app.use('/api/country-counts', countryCounts)
     app.use('/api/user', users)
     app.use('/api/auth', auth)
+    app.use('/api/logout', logout)
 
     app.use(error)
 }
