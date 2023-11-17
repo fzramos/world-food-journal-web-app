@@ -8,6 +8,7 @@ let server
 
 describe('/api/user', () => {
     let userProps
+    let token
 
     beforeEach(async () => {
         // example user register POST request body
@@ -31,7 +32,50 @@ describe('/api/user', () => {
         mongoose.disconnect()
     })
 
+    describe('GET /me', () => {
+        function exec() {
+            return request(server).get('/api/user/me').set('x-auth-token', token).send()
+        }
 
+        beforeEach(async () => {
+            // uploading a valid to the database
+            const uploadUser =  new User({
+                name: "aaa",
+                email: "abc@d.com",
+                password: "Password9!",// real passwords upload to MongoDB will be encrypted
+                adminStatus: false
+            })
+            token = uploadUser.generateAuthToken()
+            await uploadUser.save()
+        })
+        
+        it('should return 200 code if a user request the route with a valid JWT', async () => {
+            const res = await exec()
+
+            expect(res.status).toBe(200)
+        })
+
+        it('should return the correct user details if a valid request with JWT is made', async () => {
+            const res = await exec()
+
+            expect(res.body).toMatchObject({
+                name: "aaa",
+                email: "abc@d.com",
+                adminStatus: false
+            })
+        })
+
+        it('should return 400 code if a request is made with an invalid JWT', async () => {
+            // just checking that the auth middleware is active on this route
+            token = '1'
+
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+        })
+
+
+    })
 
     describe('POST /register', () => {
         // API call we are testing

@@ -8,6 +8,16 @@ import mongoose from "mongoose";
 import { User, validate } from '../models/user'
 import winston from 'winston'
 import 'dotenv/config'
+import auth from "../middleware/auth";
+
+router.get('/me', auth, async (req, res) => {
+    // give users a simple route to get ONLY THEIR OWN user details
+    // not using API parameters on purpose so (EX: /:id) so only the credentialed
+    // user can see their own data
+    const user = await User.findById(req.user._id).select('-password -__v')
+
+    res.send(user)
+})
 
 router.post('/register', async (req, res) => {
     try {
