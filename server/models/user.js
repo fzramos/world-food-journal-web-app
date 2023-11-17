@@ -54,12 +54,14 @@ const validateUserAsync = async (user) => {
             .minOfSpecialCharacters(1)
             .minOfLowercase(1)
             .minOfUppercase(1)
+            .max(200)
             .required(),
         repeat_password: joiPassword.string()
             .noWhiteSpaces()
             .minOfSpecialCharacters(1)
             .minOfLowercase(1)
             .minOfUppercase(1)
+            .max(200)
             .required()
     })
     // returning a promise
