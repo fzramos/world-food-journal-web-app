@@ -16,13 +16,16 @@ router.get('/', auth, async (req, res) => {
     const countryCounts = await CountryCount.find({userId: objId}).select('-__v')
 
     if (!countryCounts) return res.status(401).send('abc')
-    winston.info('Query results' + JSON.stringify(countryCounts))
     res.send(countryCounts)
 })
 
-router.get('/:countryCd', async (req, res) => {
-    // Placeholder for Test driven development
-    return res.status(400).send('Something went wrong')
+router.get('/:countryCd', auth, async (req, res) => {
+    const objId = new ObjectId(req.user._id)
+    const countryCount = await CountryCount.findOne({ "userId": objId, "cntryCd": req.params.countryCd }).select('-__v')
+
+    if (!countryCount) return res.status(400).send(`Country count for username ${req.user.name} and country code ${req.params.countryCd} not found.`)
+
+    res.send(countryCount)
 })
 
 export default router

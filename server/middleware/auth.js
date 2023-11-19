@@ -14,8 +14,6 @@ export default function(req, res, next) {
         const decoded = jwt.verify(token, process.env.WFJ_jwtPrivateKey)
         // adding decoded user details to the request, which will be used
         // by auth protected routes
-        console.log('wownow')
-        console.log(decoded)
         req.user = decoded
 
         next()
