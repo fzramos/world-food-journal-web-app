@@ -63,18 +63,47 @@ router.get('/', auth, async (req, res) => {
 
     res.send(restrs)
 })
-// will need to update CountryCounts for this country/user combo
-// will need to create CoutnryCoutns object if it doesn't exists
-// this route will be protected by an auth middleware
-// will need to create validate Object ID validation for this for the put route
+
+// the function of this route can be done by the above GET / route with the cntryCd query param
+// just wanted a route that clearly denotes filtering by cntryCd since that is what the web app
+// will mostly require
 router.get('/:cntryCd', auth, async (req, res) => {
-
-    const restaraunts = await Restaraunt.find({
-        // userId: req.params.id
-        country: req.params.country
-    })
-
     const objId = new ObjectId(req.user._id)
+
+    const query = { 
+        userId: objId,
+        cntryCd: req.params.cntryCd
+    }
+
+    if (req.query.wishlist) {
+        query.wishlist = req.query.wishlist === 'true';
+    }
+
+    if (req.query.rating) {
+        query.rating = { $gte: parseInt(req.query.rating)}
+    }
+
+    if (req.query.name) {
+        query.name = new RegExp(`.*${req.query.name}.*`, "i")
+    }
+
+    if (req.query.minDateUTC) {
+        try {
+            _.setWith(query, ["date", "$gte"], parseDateQuery(req.query.minDateUTC, false))
+        } catch (err) {
+            return res.status(400).send(`Min date query parameter has an invalid date format, please use YYYY-MM-DD`)
+        }
+    }
+
+    if (req.query.maxDateUTC) {
+        try {
+            _.setWith(query, ["date" , "$lte"], parseDateQuery(req.query.maxDateUTC, true))
+        } catch (err) {
+            return res.status(400).send(`Max date query parameter has an invalid date format, please use YYYY-MM-DD`)
+        }
+    }
+
+    const restaraunts = await Restaraunt.find(query).select('-__v')
 
     if (!restaraunts) {
         return res.status(400).send('No records found')
@@ -82,6 +111,16 @@ router.get('/:cntryCd', auth, async (req, res) => {
 
     return res.send(restaraunts)
 })
+
+router.delete('/:cntryCd', async () => {
+    res.status(400).send('Placeholder')
+})
+
+// will need to update CountryCounts for this country/user combo
+// will need to create CoutnryCoutns object if it doesn't exists
+// this route will be protected by an auth middleware
+// will need to create validate Object ID validation for this for the put route
+
 // ANY POST to countryCollection MUST BE userID as full ObjectId object, not hexstring
 // !!!
 // post will need a mongoose session

@@ -154,7 +154,26 @@ describe('/api/restaurants', () => {
             expect(res.body[0].name).toMatch(/a/i)
         })
 
-        it("should return all documents for the user that a date later than the minDateUTC query parameter value if a valid API call is made", async () => {
+        it("should return a 400 error with a descriptive message if an invalid minDateUTC query param value is passed", async () => {
+            const res = await request(server).get(`/api/restaurants`)
+                                            .query({ minDateUTC:  'aaa'})
+                                            .set('x-auth-token', token)
+            expect(res.status).toBe(400)
+            expect(res.text).toContain('date')
+            expect(res.text).toContain('invalid')
+        })
+
+        it("should return a 400 error with a descriptive message if an invalid maxDateUTC query param value is passed", async () => {
+            const res = await request(server).get(`/api/restaurants`)
+                                            .query({ maxDateUTC:  'aaa'})
+                                            .set('x-auth-token', token)
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain('date')
+            expect(res.text).toContain('invalid')
+        })
+
+        it("should return all documents for the user that have a date later than the minDateUTC query parameter value if a valid API call is made", async () => {
             // setting query value to 6 days ago
             // which should exclude one of the user's records
             const date6dAgoString = date6dAgo.toISOString().replace("T"," ").substring(0, 10)
@@ -165,9 +184,10 @@ describe('/api/restaurants', () => {
 
             expect(res.body).toHaveLength(1)
             expect(res.body[0]._id).toBe(restrId.toHexString())
+            expect(new Date(res.body[0].date).getTime()).toBeGreaterThan(date7dAgo.getTime())
         })
 
-        it("should return all documents for the user that a date earlier than the maxDateUTC query parameter value if a valid API call is made", async () => {
+        it("should return all documents for the user that a have date earlier than the maxDateUTC query parameter value if a valid API call is made", async () => {
             // setting query value to 6 days ago
             // which should exclude one of the user's records
             const dateOnedAgoString = dateOnedAgo.toISOString().replace("T"," ").substring(0, 10)
@@ -178,8 +198,8 @@ describe('/api/restaurants', () => {
 
             expect(res.body).toHaveLength(1)
             expect(res.body[0]._id).not.toBe(restrId.toHexString())
+            expect(new Date(res.body[0].date).getTime()).toBeLessThan(dateOnedAgo.getTime())
         })
-
 
         it('should return all documents between request query minDateUTC and maxDateUTC parameters if a valid call is made', async () => {
             let date3dAgo = new Date()
@@ -209,22 +229,150 @@ describe('/api/restaurants', () => {
             expect(res.body).toHaveLength(1)
             expect(res.body[0].name).toBe("D")
         })
-
-        
-        // rating query
-        // some ther query test
     })
 
     describe('GET /:cntryCd', () => {
-        // token
-        it("should return all current restaurant entries in the Restaurant collection", async () => {
-            const country = 'AUS'
-            const res = await request(server).get(`/api/restaurants/${country}`)
+        let query;
+        beforeEach(async () => {
+            await Restaraunt.create({
+                name: 'D',
+                userId,
+                rating: 5,
+                date: date7dAgo,
+                cntryCd: cntryCd,
+                note: "Fine",
+                location: "New York City",
+                wishlist: false
+            })
+            query = {}
+        })
+        function exec() {
+            return request(server).get(`/api/restaurants/${cntryCd}`).set('x-auth-token', token)
+        }
+
+        function execQuery() {
+            return request(server).get(`/api/restaurants/${cntryCd}`)
+                        .query(query)            
+                        .set('x-auth-token', token)
+        }
+
+        it("should status 200 if a valid API call is made", async () => {
+            const res = await exec()
+
+            expect(res.status).toBe(200)
+        })
+
+        it("should status 401 if an API call is made without a valid auth token", async () => {
+            token = ''
+            const res = await exec()
+
+            expect(res.status).toBe(401)
+        })
+        it("should return all documents in the Restaurant collection matching the cntryCd parameter and JWT userId", async () => {
+            const res = await exec()
+
+            expect(res.body).toHaveLength(2)
+            expect(res.body[0].cntryCd).toBe(cntryCd)
+            expect(res.body[1].cntryCd).toBe(cntryCd)
+        })
+
+        it("should return 0 documents if the requesting user doesn't have any documents with the given cntryCd in the Restaurant collection", async () => {            token = new User().generateAuthToken()
+            token = new User().generateAuthToken()
+
+            const res = await exec()
+
+            expect(res.body).toHaveLength(0)
+        })
+
+        it("should return all documents for the user and cntryCd that match the wishlist query parameter", async () => {
+            query = { wishlist: true}
+            const res = await execQuery()
+            
+            expect(res.body).toHaveLength(1)
+            expect(res.body[0].wishlist).toBe(true)
+        })
+
+        it("should return all documents for the user and cntryCd that have a name containing the substring from the name query parameter value", async () => {
+            query = { name: 'D'}
+            const res = await execQuery()
+
+            expect(res.body).toHaveLength(1)
+            expect(res.body[0].name).toMatch(/d/i)
+        })
+
+        it("should return a 400 error with a descriptive message if an invalid minDateUTC query param value is passed", async () => {
+            query = { minDateUTC: 'asdfa'}
+            const res = await execQuery()
 
             expect(res.status).toBe(400)
+            expect(res.text).toContain('date')
+            expect(res.text).toContain('invalid')
+        })
+
+        it("should return a 400 error with a descriptive message if an invalid maxDateUTC query param value is passed", async () => {
+            query = { maxDateUTC: 'asdfa'}
+            const res = await execQuery()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain('date')
+            expect(res.text).toContain('invalid')
+        })
+        
+        it("should return all documents for the user and cntryCd that have a date later than the minDateUTC query parameter value if a valid API call is made", async () => {
+            const date6dAgoString = date6dAgo.toISOString().replace("T"," ").substring(0, 10)
+            query = { minDateUTC: date6dAgoString}
+            const res = await execQuery()
+
+            expect(res.body).toHaveLength(1)
+            expect(res.body[0]._id).toBe(restrId.toHexString())
+            expect(new Date(res.body[0].date).getTime()).toBeGreaterThan(date7dAgo.getTime())
+        })
+
+        it("should return all documents for the user that a date earlier than the maxDateUTC query parameter value if a valid API call is made", async () => {
+            const dateOnedAgoString = dateOnedAgo.toISOString().replace("T"," ").substring(0, 10)
+            query = { maxDateUTC: dateOnedAgoString }
+            const res = await execQuery()
+
+            expect(res.body).toHaveLength(1)
+            expect(res.body[0]._id).not.toBe(restrId.toHexString())
+            expect(new Date(res.body[0].date).getTime()).toBeLessThan(dateOnedAgo.getTime())
+        })
+
+        it('should return all matching user and cntry documents between request query minDateUTC and maxDateUTC parameters', async () => {
+            let date3dAgo = new Date()
+            date3dAgo.setUTCDate(new Date().getDate()-3)
+            date3dAgo.setUTCHours(0, 0, 0, 0)
+            const newId = new mongoose.Types.ObjectId()
+            // inserting a restr record with a date 3 days in the past
+            await Restaraunt.create({
+                _id: newId,
+                name: 'D',
+                userId,
+                rating: 4,
+                cntryCd,
+                note: "Good",
+                date: date3dAgo,
+                location: "LA",
+                wishlist: false
+            })
+            const date6dAgoString = date6dAgo.toISOString().replace("T"," ").substring(0, 10)
+            const dateOnedAgoString = dateOnedAgo.toISOString().replace("T"," ").substring(0, 10)
+            query = {
+                minDateUTC: date6dAgoString,
+                maxDateUTC:  dateOnedAgoString
+            }
+            const res = await execQuery()
+
+            expect(res.body).toHaveLength(1)
+            expect(res.body[0]._id).toBe(newId.toHexString())
         })
     })
 
-    // wishlist fileter route??? yes... just like select all
-    // 
+    describe('DELETE /:cntryCd', () => {
+        it('should return a 200 status if a call is made with a valid JWT', async () => {
+            const res = await request(server).delete(restrId)
+
+            expect(res.status).toBe(200)
+        })
+    })
 })
