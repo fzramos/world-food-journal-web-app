@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import CountryCount from "../models/countryCount";
 import auth from '../middleware/auth'
 import winston from 'winston';
-// import { ObjectId } from 'mongodb'
 const ObjectId = mongoose.Types.ObjectId;
 
 // only validated users should be able to use this route
@@ -19,11 +18,11 @@ router.get('/', auth, async (req, res) => {
     res.send(countryCounts)
 })
 
-router.get('/:countryCd', auth, async (req, res) => {
+router.get('/:cntryCd', auth, async (req, res) => {
     const objId = new ObjectId(req.user._id)
-    const countryCount = await CountryCount.findOne({ "userId": objId, "cntryCd": req.params.countryCd }).select('-__v')
+    const countryCount = await CountryCount.findOne({ "userId": objId, "cntryCd": req.params.cntryCd }).select('-__v')
 
-    if (!countryCount) return res.status(400).send(`Country count for username ${req.user.name} and country code ${req.params.countryCd} not found.`)
+    if (!countryCount) return res.status(400).send(`Country count for username ${req.user.name} and country code ${req.params.cntryCd} not found.`)
 
     res.send(countryCount)
 })

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import Joi from 'joi'
 
+// TODO: combo of userId and cntryCd should ALWAYS be unique
 const countryCountSchema = new mongoose.Schema({
     cntryCd: {
         type: String,
@@ -8,6 +9,7 @@ const countryCountSchema = new mongoose.Schema({
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
         ref: 'User'
     },
     restr: {

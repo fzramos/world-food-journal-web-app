@@ -54,7 +54,7 @@ describe('/api/country-counts', () => {
             ]
             // create 2 weight entries for diff countries with the same user id
 
-            await CountryCount.collection.insertMany(countryCountObjects)
+            await CountryCount.create(countryCountObjects)
         })
 
         function exec() {
@@ -84,22 +84,22 @@ describe('/api/country-counts', () => {
         })
     })
 
-    describe("GET /:countryCd", () => {
+    describe("GET /:cntryCd", () => {
         const user = new User()
         let userId;
         let token;
         let cntryCd;
-        let countryCdObjectId;
+        let cntryCdObjectId;
         // let countryCountObjects
 
         beforeEach(async () => {
             userId = user._id
             cntryCd = "AFG"
             token = user.generateAuthToken()
-            countryCdObjectId = new mongoose.Types.ObjectId()
+            cntryCdObjectId = new mongoose.Types.ObjectId()
 
             await CountryCount.collection.insertOne({
-                _id: countryCdObjectId,
+                _id: cntryCdObjectId,
                 cntryCd: cntryCd,
                 userId: userId,
                 restr: 0,
@@ -126,7 +126,7 @@ describe('/api/country-counts', () => {
             const res = await exec()
 
             expect(res.body).toMatchObject({
-                _id: countryCdObjectId.toHexString(),
+                _id: cntryCdObjectId.toHexString(),
                 cntryCd: cntryCd,
                 userId: userId.toHexString(),
                 restr: 0,
@@ -135,7 +135,7 @@ describe('/api/country-counts', () => {
             })
         })
 
-        it('should return a 400 code if an non-existent countryCd parameter is given', async () => {
+        it('should return a 400 code if an non-existent cntryCd parameter is given', async () => {
             cntryCd = '_'
             const res = await exec()
 
