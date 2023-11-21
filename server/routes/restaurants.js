@@ -3,6 +3,7 @@ import _ from 'lodash'
 const router = express.Router()
 import { Restaraunt, validate } from "../models/restaurant";
 import auth from '../middleware/auth';
+import validateObjectId from '../middleware/validateObjectId';
 import winston from 'winston';
 import mongoose from 'mongoose';
 const ObjectId = mongoose.Types.ObjectId;
@@ -112,9 +113,14 @@ router.get('/:cntryCd', auth, async (req, res) => {
     return res.send(restaraunts)
 })
 
-router.delete('/:cntryCd', async () => {
-    res.status(400).send('Placeholder')
+router.delete('/:id', [auth, validateObjectId], async (req, res) => {
+    const restr = await Restaraunt.findByIdAndDelete(req.params.id).select('-__v')
+    
+    if (!restr) return res.status(404).send(`Restaurant record with ID ${req.params.id} not found`)
+
+    res.send(restr)
 })
+
 
 // will need to update CountryCounts for this country/user combo
 // will need to create CoutnryCoutns object if it doesn't exists
@@ -124,4 +130,8 @@ router.delete('/:cntryCd', async () => {
 // ANY POST to countryCollection MUST BE userID as full ObjectId object, not hexstring
 // !!!
 // post will need a mongoose session
+
+
 export default router;
+
+

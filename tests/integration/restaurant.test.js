@@ -109,6 +109,7 @@ describe('/api/restaurants', () => {
 
         it("should return a 401 status if an unauthorized API request is made", async () => {
             token = ''
+            
             const res = await exec()
 
             expect(res.status).toBe(401)
@@ -276,7 +277,7 @@ describe('/api/restaurants', () => {
             expect(res.body[1].cntryCd).toBe(cntryCd)
         })
 
-        it("should return 0 documents if the requesting user doesn't have any documents with the given cntryCd in the Restaurant collection", async () => {            token = new User().generateAuthToken()
+        it("should return 0 documents if the requesting user doesn't have any documents with the given cntryCd in the Restaurant collection", async () => {            
             token = new User().generateAuthToken()
 
             const res = await exec()
@@ -368,11 +369,53 @@ describe('/api/restaurants', () => {
         })
     })
 
-    describe('DELETE /:cntryCd', () => {
-        it('should return a 200 status if a call is made with a valid JWT', async () => {
-            const res = await request(server).delete(restrId)
+    describe('DELETE /:restrId', () => {
+        function exec() {
+            return request(server).delete(`/api/restaurants/${restrId}`).set('x-auth-token', token)
+        }
 
+        it('should return a 401 status if an unauthorized API call is made', async () => {
+            token = ''
+
+            const res = await exec()
+
+            expect(res.status).toBe(401)
+        })
+
+        it('should return a 200 status if a call is made with a valid JWT', async () => {
+            const res = await exec()
             expect(res.status).toBe(200)
+        })
+
+        it('should return as 400 status and descriptive error message if an invalid ObjectId is passed', async () => {
+            restrId = 'a'
+            const res = await exec()
+
+            expect(res.status).toBe(404)
+            expect(res.text).toMatch(/id/i)
+        })
+
+        it('should return as 400 status if an valid but non-existent ObjectId is passed', async () => {
+            restrId = new mongoose.Types.ObjectId()
+            const res = await exec()
+
+            expect(res.status).toBe(404)
+            expect(res.text).toMatch(/id/i)
+        })
+        it('should delete the requested document from the Restaurant collection', async () => {
+            await exec()
+
+            const result = await Restaraunt.findById(restrId)
+
+            expect(result).toBeNull()
+        })
+
+        it('should return the deleted document', async () => {
+            const res = await exec()
+
+            expect(res.body._id).toBe(restrId.toHexString())
         })
     })
 })
+
+
