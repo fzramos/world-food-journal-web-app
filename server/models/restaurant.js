@@ -51,10 +51,10 @@ const restarauntSchema = new mongoose.Schema({
 
 const Restaraunt = mongoose.model('Restaraunt', restarauntSchema)
 
-const validateRestaurant = () => {
+// userId will not be in API call, it will be taken from the JWT of the request
+const validateRestaurant = (restr) => {
     const schema = Joi.object({
         name: Joi.string().min(1).max(200).required(),
-        userId: Joi.objectId().required(),
         rating: Joi.number().min(0).max(5).required(),
         date: Joi.date(),
         cntryCd: Joi.string().min(1).max(5).required(),
@@ -63,7 +63,22 @@ const validateRestaurant = () => {
         wishlist: Joi.boolean() // default false
     })
 
-    return schema.validateAsync()
+    return schema.validateAsync(restr)
 }
 
-export { Restaraunt, validateRestaurant as validate}
+// difference is nothing will be required since updating each property is optional
+const validateRestaurantUpdate = (restr) => {
+    const schema = Joi.object({
+        name: Joi.string().min(1).max(200),
+        rating: Joi.number().min(0).max(5),
+        date: Joi.date(),
+        cntryCd: Joi.string().min(1).max(5),
+        note: Joi.string().max(20000), // long string
+        location: Joi.string().min(3).max(200),
+        wishlist: Joi.boolean() // default false
+    })
+
+    return schema.validateAsync(restr)
+}
+
+export { Restaraunt, validateRestaurant as validate, validateRestaurantUpdate as validateUpdate}

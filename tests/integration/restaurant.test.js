@@ -416,6 +416,110 @@ describe('/api/restaurants', () => {
             expect(res.body._id).toBe(restrId.toHexString())
         })
     })
+
+    describe('PUT /:restrId', () => {
+        let updatedRestr
+
+        beforeEach(() => {
+            updatedRestr = {
+                name: 'Ab',
+                rating: 5,
+                cntryCd: cntryCd,
+                note: "Great",
+                location: "New York City",
+                wishlist: false
+            }
+        })
+
+        function exec() {
+            return request(server)
+                    .put(`/api/restaurants/${restrId}`)
+                    .set('x-auth-token', token)
+                    .send(updatedRestr)
+        }
+
+        it('should return a 401 status if an unauthorized API call is made', async () => {
+            token = ''
+
+            const res = await exec()
+
+            expect(res.status).toBe(401)
+        })
+
+        it('should return a 200 status if a call is made with a valid JWT', async () => {
+            const res = await exec()
+            expect(res.status).toBe(200)
+        })
+
+        it('should return as 400 status and descriptive error message if an invalid ObjectId is passed', async () => {
+            restrId = 'a'
+            const res = await exec()
+
+            expect(res.status).toBe(404)
+            expect(res.text).toMatch(/id/i)
+        })
+
+        it('should return as 400 status if an valid but non-existent ObjectId is passed', async () => {
+            restrId = new mongoose.Types.ObjectId()
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toMatch(/id/i)
+        })
+        
+        it('should update the requested document from the Restaurant collection', async () => {
+            await exec()
+
+            const result = await Restaraunt.findById(restrId)
+
+            expect(result).toMatchObject(updatedRestr)
+        })
+
+        it('should return the updated document\'s values', async () => {
+            const res = await exec()
+            
+            expect(res.body).toMatchObject(updatedRestr)
+            expect(res.body._id).toBe(restrId.toHexString())
+        })
+
+        it('should return a 400 error and descriptive message if the name req.body property value is less than 1 character', async () => {
+            updatedRestr.name = ""
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("name")
+        })
+        
+        it('should return a 400 error and descriptive message if the name req.body property value is greater than 200 characters', async () => {
+            updatedRestr.name = '1'.repeat(201)
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("name")
+            expect(res.text).toContain("200")
+        })
+
+
+        it('should return a 400 error and descriptive message if the rating req.body property value greater than 5', async () => {
+            updatedRestr.rating = 6
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("rating")
+            expect(res.text).toContain("5")
+        })
+        
+        it('should return a 400 error and descriptive message if the rating req.body property value is less than 0', async () => {
+            updatedRestr.rating = -1
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("rating")
+            expect(res.text).toContain("0")
+        })
+
+        // more req.body validation tests needed
+    })
 })
 
 

@@ -1,7 +1,7 @@
 import express from 'express'
 import _ from 'lodash'
 const router = express.Router()
-import { Restaraunt, validate } from "../models/restaurant";
+import { Restaraunt, validate, validateUpdate } from "../models/restaurant";
 import auth from '../middleware/auth';
 import validateObjectId from '../middleware/validateObjectId';
 import winston from 'winston';
@@ -120,6 +120,34 @@ router.delete('/:id', [auth, validateObjectId], async (req, res) => {
 
     res.send(restr)
 })
+
+router.put('/:id', [auth, validateObjectId], async (req, res) => {
+    try {
+        await validateUpdate(req.body)
+    } catch (err) {
+        return res.status(400).send(err.details[0].message)
+    }
+
+    // can't use findByIdAndUpdate because users should only be able to modify
+    // their own data
+    const restr = await Restaraunt.findOneAndUpdate(
+        {
+        _id: req.params.id,
+        userId: req.user._id
+        }, 
+        {
+            $set: _.pick(req.body, ["name", "rating", "date", "cntryCd", "note", "location", "wishlist"])
+        },
+        { 
+            new: true 
+        }
+    )
+    
+    if (!restr) return res.status(400).send(`Restaurant record with ID ${req.params.id} not found or not associated with user ${req.user._id}`)
+
+    res.send(restr)
+})
+
 
 
 // will need to update CountryCounts for this country/user combo
