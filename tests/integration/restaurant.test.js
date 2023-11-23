@@ -555,6 +555,42 @@ describe('/api/restaurants', () => {
         })
 
 
+
+        it('should return a 400 error and descriptive message if the location req.body property value is less than 1 character', async () => {
+            updatedRestr.location = ""
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("location")
+        })
+        
+        it('should return a 400 error and descriptive message if the location req.body property value is greater than 200 characters', async () => {
+            updatedRestr.location = '1'.repeat(201)
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("location")
+            expect(res.text).toContain("200")
+        })
+        
+        it('should return a 400 error and descriptive message if the wishlist req.body property value is not a boolean', async () => {
+            updatedRestr.wishlist = '1'
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("wishlist")
+            expect(res.text).toContain("boolean")
+        })
+
+        
+        it('should return an successfully updated object if only wishlist req.body property object is passed', async () => {
+            updatedRestr = { wishlist : false }
+            const res = await exec()
+
+            
+            expect(res.body.wishlist).toBe(false)
+        })
+
         // more req.body validation tests needed
     })
 })
