@@ -517,6 +517,43 @@ describe('/api/restaurants', () => {
             expect(res.text).toContain("rating")
             expect(res.text).toContain("0")
         })
+      
+        it('should return a 400 error and descriptive message if the cntryCd req.body property value length is less than 1', async () => {
+            updatedRestr.cntryCd = "a" 
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("cntryCd")
+            expect(res.text).toContain("1")
+        })
+  
+        it('should return a 400 error and descriptive message if the note req.body property value length is less than 1', async () => {
+            updatedRestr.note = ""
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("note")
+            expect(res.text).toContain("1")
+        })
+
+        it('should return a 400 error and descriptive message if the cntryCd req.body property value length is greater than 5', async () => {
+            updatedRestr.cntryCd = "1". repeat(6)
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("cntryCd")
+            expect(res.text).toContain("5")
+        })
+
+        it('should return a 400 error and descriptive message if the note req.body property value length is greater than 3000', async () => {
+            updatedRestr.note = "1". repeat(3001)
+            const res = await exec()
+
+            expect(res.status).toBe(400)
+            expect(res.text).toContain("note")
+            expect(res.text).toContain("3000")
+        })
+
 
         // more req.body validation tests needed
     })
