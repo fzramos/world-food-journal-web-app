@@ -36,7 +36,11 @@ const WorldMap = () => {
       <Marker position={center} onClick={() => console.log('yes')}>
         <Popup>You are here!</Popup>
       </Marker>
-      <GeoJSON data={countriesGeoJSON} onEachFeature={onEachFeature} />
+      <GeoJSON
+        data={countriesGeoJSON}
+        onEachFeature={onEachFeature}
+        opacity={0}
+      />
     </MapContainer>
   );
 };
