@@ -6,6 +6,7 @@ import auth from '../middleware/auth';
 import validateObjectId from '../middleware/validateObjectId';
 import winston from 'winston';
 import mongoose from 'mongoose';
+import CountryCount from '../models/countryCount';
 const ObjectId = mongoose.Types.ObjectId;
 
 function parseDateQuery(dateStr, isEndDt) {
@@ -154,16 +155,44 @@ router.get('/:cntryCd', auth, async (req, res) => {
 });
 
 router.delete('/:id', [auth, validateObjectId], async (req, res) => {
-  const restr = await Restaraunt.findByIdAndDelete(req.params.id).select(
-    '-__v'
-  );
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const restr = await Restaraunt.findByIdAndDelete(req.params.id).select(
+      '-__v'
+    );
 
-  if (!restr)
-    return res
-      .status(404)
-      .send(`Restaurant record with ID ${req.params.id} not found`);
+    if (!restr)
+      return res
+        .status(400)
+        .send(`Restaurant record with ID ${req.params.id} not found`);
 
-  res.send(restr);
+    const userId = new ObjectId(req.user._id);
+    let countryCount = await CountryCount.findOne({
+      userId,
+      cntryCd: restr.cntryCd,
+    });
+
+    if (!countryCount) {
+      winston.error(
+        `User id ${req.user._id} and cntryCd ${req.body.cntryCd} combination have Restaurant document but not a CountryCd collection value. Please review.`
+      );
+      return res.status(400).send(`Problem in deleting restaurant record`);
+    } else {
+      countryCount.restr--;
+      await countryCount.save();
+    }
+
+    res.send(restr);
+    await session.commitTransaction();
+  } catch (err) {
+    await session.abortTransaction();
+    res
+      .status(400)
+      .send(`Error posting the restaurant record, Error ${err._message}`);
+  } finally {
+    session.endSession();
+  }
 });
 
 router.put('/:id', [auth, validateObjectId], async (req, res) => {
@@ -204,6 +233,75 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
       );
 
   res.send(restr);
+});
+
+router.post('/', auth, async (req, res) => {
+  try {
+    await validate(req.body);
+  } catch (err) {
+    return res.status(400).send(err.details[0].message);
+  }
+
+  // need a session since when I post here, I need to update the countryCount collection as well
+  // if Restaurant post fails, I don't want to update the countryCount
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const userId = new ObjectId(req.user._id);
+    let countryCount = await CountryCount.findOne({
+      userId,
+      cntryCd: req.body.cntryCd,
+    });
+
+    if (!countryCount) {
+      // this mean this is the first journal entry for this country
+      countryCount = new CountryCount({
+        cntryCd: req.body.cntryCd,
+        userId,
+        restr: 1,
+        // other values will default to 0
+      });
+    } else {
+      countryCount.restr++;
+    }
+    countryCount.save();
+
+    const restrProps = _.pick(req.body, [
+      'name',
+      'rating',
+      'date',
+      'cntryCd',
+      'note',
+      'location',
+      'wishlist',
+    ]);
+    restrProps.userId = userId;
+
+    const restr = new Restaraunt(restrProps);
+    restr.save();
+
+    res.send(
+      _.pick(restr, [
+        '_id',
+        'name',
+        'rating',
+        'userId',
+        'date',
+        'cntryCd',
+        'note',
+        'location',
+        'wishlist',
+      ])
+    );
+    await session.commitTransaction();
+  } catch (err) {
+    await session.abortTransaction();
+    res
+      .status(400)
+      .send(`Error posting the restaurant record, Error ${err._message}`);
+  } finally {
+    session.endSession();
+  }
 });
 
 // will need to update CountryCounts for this country/user combo

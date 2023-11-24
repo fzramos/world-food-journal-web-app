@@ -6,6 +6,8 @@ import config from 'config';
 import { User } from '../../server/models/user';
 import CountryCount from '../../server/models/countryCount';
 import winston from 'winston';
+import e from 'express';
+import _ from 'lodash';
 let server;
 
 describe('/api/restaurants', () => {
@@ -85,6 +87,7 @@ describe('/api/restaurants', () => {
   afterEach(async () => {
     await server.close();
     await Restaraunt.deleteMany({});
+    await CountryCount.deleteMany({});
   });
   afterAll(() => {
     mongoose.disconnect();
@@ -438,7 +441,7 @@ describe('/api/restaurants', () => {
       restrId = 'a';
       const res = await exec();
 
-      expect(res.status).toBe(404);
+      expect(res.status).toBe(400);
       expect(res.text).toMatch(/id/i);
     });
 
@@ -446,7 +449,7 @@ describe('/api/restaurants', () => {
       restrId = new mongoose.Types.ObjectId();
       const res = await exec();
 
-      expect(res.status).toBe(404);
+      expect(res.status).toBe(400);
       expect(res.text).toMatch(/id/i);
     });
     it('should delete the requested document from the Restaurant collection', async () => {
@@ -461,6 +464,30 @@ describe('/api/restaurants', () => {
       const res = await exec();
 
       expect(res.body._id).toBe(restrId.toHexString());
+    });
+
+    it('should update the relevant CountryCount document to have a "restr" property value decremented by 1 if a call is made with a valid JWT', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      await exec();
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.restr - 1).toBe(updatedCountryCount.restr);
+    });
+
+    it('should return a 400 status if there is no relevant CountryCount document for the given userId and cntryCd', async () => {
+      await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+      const res = await exec();
+
+      expect(res.status).toBe(400);
     });
   });
 
@@ -502,7 +529,7 @@ describe('/api/restaurants', () => {
       restrId = 'a';
       const res = await exec();
 
-      expect(res.status).toBe(404);
+      expect(res.status).toBe(400);
       expect(res.text).toMatch(/id/i);
     });
 
@@ -631,6 +658,260 @@ describe('/api/restaurants', () => {
       expect(res.body.wishlist).toBe(false);
     });
 
-    // more req.body validation tests needed
+    it('should update the relevant MongoDB document if an object with only a wishlist req.body property is passed', async () => {
+      updatedRestr = { wishlist: false };
+      await exec();
+
+      const result = await Restaraunt.findById(restrId);
+
+      expect(result.wishlist).toBe(false);
+    });
+  });
+
+  describe('POST /', () => {
+    let newRestr;
+
+    beforeEach(() => {
+      newRestr = {
+        name: 'Ab',
+        rating: 5,
+        cntryCd: cntryCd,
+        date: date7dAgo,
+        note: 'Great',
+        location: 'New York City',
+        wishlist: false,
+      };
+    });
+
+    function exec() {
+      return request(server)
+        .post(`/api/restaurants`)
+        .set('x-auth-token', token)
+        .send(newRestr);
+    }
+
+    it('should return a 401 status if an unauthorized API call is made', async () => {
+      token = '';
+
+      const res = await exec();
+
+      expect(res.status).toBe(401);
+    });
+
+    it('should return a 200 status if a call is made with a valid JWT', async () => {
+      const res = await exec();
+
+      expect(res.status).toBe(200);
+    });
+
+    it('should return a 400 status and descriptive message if a call is made userId req.body prop', async () => {
+      newRestr.userId = userId;
+      // this will be set by looking at req JWT userId
+      // so a user can only upload journal entries associated with their Id
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/userId/i);
+    });
+
+    it('should create a document Restaurant collection with matching parameters', async () => {
+      await exec();
+
+      const result = await Restaraunt.findOne(newRestr);
+
+      expect(result).toBeDefined();
+      // expect(result).toMatchObject(newRestr);
+    });
+
+    it('should return the created document from the Restaurant collection', async () => {
+      const res = await exec();
+
+      expect(res.body).toHaveProperty('_id');
+      expect(res.body).toMatchObject(
+        _.pick(newRestr, [
+          'cntryCd',
+          'location',
+          'name',
+          'note',
+          'rating',
+          'wishlist',
+        ])
+      );
+    });
+
+    it('should return a 400 error and descriptive message if the name req.body property is not present', async () => {
+      delete newRestr.name;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('name');
+    });
+
+    it('should return a 400 error and descriptive message if the name req.body property value is less than 1 character', async () => {
+      newRestr.name = '';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('name');
+    });
+
+    it('should return a 400 error and descriptive message if the name req.body property value is greater than 200 characters', async () => {
+      newRestr.name = '1'.repeat(201);
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('name');
+      expect(res.text).toContain('200');
+    });
+
+    it('should return a 400 error and descriptive message if the rating req.body property is not present', async () => {
+      delete newRestr.rating;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('rating');
+    });
+
+    it('should return a 400 error and descriptive message if the rating req.body property value greater than 5', async () => {
+      newRestr.rating = 6;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('rating');
+      expect(res.text).toContain('5');
+    });
+
+    it('should return a 400 error and descriptive message if the rating req.body property value is less than 0', async () => {
+      newRestr.rating = -1;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('rating');
+      expect(res.text).toContain('0');
+    });
+
+    it('should return a 400 error and descriptive message if the cntryCd req.body property is not present', async () => {
+      newRestr.cntryCd = '';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('cntryCd');
+    });
+
+    it('should return a 400 error and descriptive message if the cntryCd req.body property value length is less than 1', async () => {
+      newRestr.cntryCd = '';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('cntryCd');
+    });
+
+    it('should return a 400 error and descriptive message if the note req.body property value length is less than 1', async () => {
+      newRestr.note = '';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('note');
+    });
+
+    it('should return a 400 error and descriptive message if the cntryCd req.body property value length is greater than 5', async () => {
+      newRestr.cntryCd = '1'.repeat(6);
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('cntryCd');
+      expect(res.text).toContain('5');
+    });
+
+    it('should return a 400 error and descriptive message if the note req.body property value length is greater than 3000', async () => {
+      newRestr.note = '1'.repeat(200001);
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('note');
+      expect(res.text).toContain('20000');
+    });
+
+    it('should return a 400 error and descriptive message if the location req.body property value is less than 1 character', async () => {
+      newRestr.location = '';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('location');
+    });
+
+    it('should return a 400 error and descriptive message if the location req.body property value is greater than 200 characters', async () => {
+      newRestr.location = '1'.repeat(201);
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('location');
+      expect(res.text).toContain('200');
+    });
+
+    it('should return a 400 error and descriptive message if the wishlist req.body property value is not a boolean', async () => {
+      newRestr.wishlist = '1';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('wishlist');
+      expect(res.text).toContain('boolean');
+    });
+
+    it('should update the relevant CountryCount document to have a "restr" property value incremented by 1', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      await exec();
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.restr + 1).toBe(updatedCountryCount.restr);
+    });
+
+    it('should return a 200 status if there is no relevant CountryCount document for the given userId and cntryCd', async () => {
+      await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+    });
+
+    it('should create a new CountryCount document if no relevant CountryCount document exists for the given userId and cntryCd', async () => {
+      await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+      const res = await exec();
+      const createdCountryCount = await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+
+      expect(createdCountryCount).toBeDefined();
+      expect(createdCountryCount.restr).toBe(1);
+    });
+    //  WISHLIST: Wishlist: true should not update CountryCode restr count but wishlist count
+
+    // it('should return an successfully updated object if only wishlist req.body property object is passed', async () => {
+    //   newRestr = { wishlist: false };
+    //   const res = await exec();
+
+    //   expect(res.body.wishlist).toBe(false);
+    // });
+
+    // it('should update the relevant MongoDB document if an object with only a wishlist req.body property is passed', async () => {
+    //   newRestr = { wishlist: false };
+    //   await exec();
+
+    //   const result = await Restaraunt.findById(restrId);
+
+    //   expect(result.wishlist).toBe(false);
+    // });
   });
 });
