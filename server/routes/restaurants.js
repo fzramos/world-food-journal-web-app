@@ -202,37 +202,72 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
     return res.status(400).send(err.details[0].message);
   }
 
-  // can't use findByIdAndUpdate because users should only be able to modify
-  // their own data
-  const restr = await Restaraunt.findOneAndUpdate(
-    {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const userId = new ObjectId(req.user._id);
+
+    // Old restr document
+    let restr = await Restaraunt.findOne({
       _id: req.params.id,
-      userId: req.user._id,
-    },
-    {
-      $set: _.pick(req.body, [
-        'name',
-        'rating',
-        'date',
-        'cntryCd',
-        'note',
-        'location',
-        'wishlist',
-      ]),
-    },
-    {
-      new: true,
+      userId: userId,
+    });
+
+    if (!restr)
+      return res
+        .status(400)
+        .send(
+          `Restaurant record with ID ${req.params.id} not found or not associated with user ${req.user._id}`
+        );
+    let countryCount = await CountryCount.findOne({
+      userId,
+      cntryCd: restr.cntryCd,
+    });
+    // if update is changing wishlist boolean, need to change countryCount object appropriately
+    if (restr.wishlist !== req.body.wishlist) {
+      if (req.body.wishlist) {
+        countryCount.restr--;
+        countryCount.wishlist++;
+      } else {
+        countryCount.wishlist--;
+        countryCount.restr++;
+      }
     }
-  );
+    countryCount.save();
 
-  if (!restr)
-    return res
+    // can't use findByIdAndUpdate because users should only be able to modify
+    // their own data
+    restr = await Restaraunt.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        userId: req.user._id,
+      },
+      {
+        $set: _.pick(req.body, [
+          'name',
+          'rating',
+          'date',
+          'cntryCd',
+          'note',
+          'location',
+          'wishlist',
+        ]),
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.send(restr);
+    await session.commitTransaction();
+  } catch (err) {
+    await session.abortTransaction();
+    res
       .status(400)
-      .send(
-        `Restaurant record with ID ${req.params.id} not found or not associated with user ${req.user._id}`
-      );
-
-  res.send(restr);
+      .send(`Error posting the restaurant record, Error ${err._message}`);
+  } finally {
+    session.endSession();
+  }
 });
 
 router.post('/', auth, async (req, res) => {

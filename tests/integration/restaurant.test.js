@@ -1,12 +1,9 @@
 import request from 'supertest';
 import { Restaraunt } from '../../server/models/restaurant';
 import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import config from 'config';
 import { User } from '../../server/models/user';
 import CountryCount from '../../server/models/countryCount';
 import winston from 'winston';
-import e from 'express';
 import _ from 'lodash';
 let server;
 
@@ -51,6 +48,7 @@ describe('/api/restaurants', () => {
       restr: 2,
       hm: 1,
       misc: 1,
+      wishlist: 1,
     });
 
     await Restaraunt.insertMany([
@@ -523,6 +521,7 @@ describe('/api/restaurants', () => {
 
     it('should return a 200 status if a call is made with a valid JWT', async () => {
       const res = await exec();
+
       expect(res.status).toBe(200);
     });
 
@@ -652,6 +651,9 @@ describe('/api/restaurants', () => {
       expect(res.text).toContain('boolean');
     });
 
+    // CRITICAL TESTS as updating a restr document's wishlist status from true to false
+    // will be the most common update. Which represents turning a restaurant you've been
+    // planning to go to into a restr you've been to and want to journal about
     it('should return an successfully updated object if only wishlist req.body property object is passed', async () => {
       updatedRestr = { wishlist: false };
       const res = await exec();
@@ -666,6 +668,44 @@ describe('/api/restaurants', () => {
       const result = await Restaraunt.findById(restrId);
 
       expect(result.wishlist).toBe(false);
+    });
+
+    it('should update the relevant CountryCount document to have a "restr" property value decrement by 1 and "wishlist" property increment by 1 if the req body changes the wishlist value to true from false', async () => {
+      // turning wishlist value to false
+      await exec();
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      // turning wishlist value back to true
+      updatedRestr = { wishlist: true };
+
+      await exec();
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.restr - 1).toBe(updatedCountryCount.restr);
+      expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
+    });
+
+    it('should update the relevant CountryCount document to have a "restr" property value increment by 1 and "wishlist" property decrement by 1 if the req body changes the wishlist value to false from true', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      updatedRestr = { wishlist: false };
+
+      await exec();
+
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.restr + 1).toBe(updatedCountryCount.restr);
+      expect(oldCountryCount.wishlist - 1).toBe(updatedCountryCount.wishlist);
     });
   });
 
