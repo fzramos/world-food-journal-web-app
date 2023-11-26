@@ -24,6 +24,10 @@ const countryCountSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  wishlist: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const CountryCount = mongoose.model('country_count', countryCountSchema);

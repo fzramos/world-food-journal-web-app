@@ -132,6 +132,7 @@ describe('/api/restaurants', () => {
         .query({ wishlist: true })
         .set('x-auth-token', token);
       expect(res.body).toHaveLength(1);
+
       expect(res.body[0].wishlist).toBe(true);
     });
 
@@ -858,7 +859,7 @@ describe('/api/restaurants', () => {
       expect(res.text).toContain('boolean');
     });
 
-    it('should update the relevant CountryCount document to have a "restr" property value incremented by 1', async () => {
+    it('should update the relevant CountryCount document to have a "restr" property value incremented by 1 if the req body has wishlist: true', async () => {
       const oldCountryCount = await CountryCount.findOne({
         userId,
         cntryCd,
@@ -872,6 +873,23 @@ describe('/api/restaurants', () => {
       expect(oldCountryCount.restr + 1).toBe(updatedCountryCount.restr);
     });
 
+    it('should update the relevant CountryCount document to have a "wishlist" property value incremented by 1 if the req body has wishlist: true', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      newRestr.wishlist = true;
+      await exec();
+
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
+    });
+
     it('should return a 200 status if there is no relevant CountryCount document for the given userId and cntryCd', async () => {
       await CountryCount.findOneAndDelete({
         userId,
@@ -879,10 +897,10 @@ describe('/api/restaurants', () => {
       });
       const res = await exec();
 
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(200);
     });
 
-    it('should create a new CountryCount document if no relevant CountryCount document exists for the given userId and cntryCd', async () => {
+    it('should create a new CountryCount document with a restr value of 1 if no relevant CountryCount document exists for the given userId and cntryCd and the req body has wishlist: false', async () => {
       await CountryCount.findOneAndDelete({
         userId,
         cntryCd,
@@ -895,7 +913,27 @@ describe('/api/restaurants', () => {
 
       expect(createdCountryCount).toBeDefined();
       expect(createdCountryCount.restr).toBe(1);
+      expect(createdCountryCount.wishlist).toBe(0);
     });
+
+    it('should create CountryCount document with a wishlist value of 1 if no relevant CountryCount document exists for the given userId and cntryCd and the req body has wishlist: true', async () => {
+      await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+      newRestr.wishlist = true;
+
+      const res = await exec();
+      const createdCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(createdCountryCount).not.toBeNull();
+      expect(createdCountryCount.restr).toBe(0);
+      expect(createdCountryCount.wishlist).toBe(1);
+    });
+
     //  WISHLIST: Wishlist: true should not update CountryCode restr count but wishlist count
 
     // it('should return an successfully updated object if only wishlist req.body property object is passed', async () => {

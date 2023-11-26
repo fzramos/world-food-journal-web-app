@@ -253,16 +253,23 @@ router.post('/', auth, async (req, res) => {
       cntryCd: req.body.cntryCd,
     });
 
-    if (!countryCount) {
+    if (!countryCount && !req.body.wishlist) {
       // this mean this is the first journal entry for this country
       countryCount = new CountryCount({
         cntryCd: req.body.cntryCd,
         userId,
         restr: 1,
-        // other values will default to 0
       });
-    } else {
+    } else if (!countryCount && req.body.wishlist) {
+      countryCount = new CountryCount({
+        cntryCd: req.body.cntryCd,
+        userId,
+        wishlist: 1,
+      });
+    } else if (countryCount && !req.body.wishlist) {
       countryCount.restr++;
+    } else {
+      countryCount.wishlist++;
     }
     countryCount.save();
 
@@ -303,14 +310,5 @@ router.post('/', auth, async (req, res) => {
     session.endSession();
   }
 });
-
-// will need to update CountryCounts for this country/user combo
-// will need to create CoutnryCoutns object if it doesn't exists
-// this route will be protected by an auth middleware
-// will need to create validate Object ID validation for this for the put route
-
-// ANY POST to countryCollection MUST BE userID as full ObjectId object, not hexstring
-// !!!
-// post will need a mongoose session
 
 export default router;
