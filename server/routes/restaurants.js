@@ -178,6 +178,9 @@ router.delete('/:id', [auth, validateObjectId], async (req, res) => {
         `User id ${req.user._id} and cntryCd ${req.body.cntryCd} combination have Restaurant document but not a CountryCd collection value. Please review.`
       );
       return res.status(400).send(`Problem in deleting restaurant record`);
+    } else if (restr.wishlist) {
+      countryCount.wishlist--;
+      await countryCount.save();
     } else {
       countryCount.restr--;
       await countryCount.save();

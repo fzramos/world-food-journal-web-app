@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import Joi from 'joi';
-// import joiObjectid from 'joi-objectid';
 
-// TODO: Add additional limits such as value minimums, defaults, and required fields
 const restarauntSchema = new mongoose.Schema({
   name: {
     type: String,

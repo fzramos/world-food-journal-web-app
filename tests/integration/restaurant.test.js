@@ -465,7 +465,28 @@ describe('/api/restaurants', () => {
       expect(res.body._id).toBe(restrId.toHexString());
     });
 
-    it('should update the relevant CountryCount document to have a "restr" property value decremented by 1 if a call is made with a valid JWT', async () => {
+    it('should update the relevant CountryCount document to have its "restr" property value decremented by 1 the restr doc\'s wishlist property was false if a call is made with a valid JWT', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      await exec();
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+    });
+
+    it('should update the relevant CountryCount document to have its "wishlist" property value decremented by 1 the restr doc\'s wishlist property was true if a call is made with a valid JWT', async () => {
+      // updating doc to be a wishlist=true
+      await Restaraunt.findByIdAndUpdate(
+        restrId,
+        {
+          $set: { wishlist: true },
+        },
+        {}
+      );
+
       const oldCountryCount = await CountryCount.findOne({
         userId,
         cntryCd,
@@ -476,7 +497,7 @@ describe('/api/restaurants', () => {
         cntryCd,
       });
 
-      expect(oldCountryCount.restr - 1).toBe(updatedCountryCount.restr);
+      expect(oldCountryCount.wishlist - 1).toBe(updatedCountryCount.wishlist);
     });
 
     it('should return a 400 status if there is no relevant CountryCount document for the given userId and cntryCd', async () => {
