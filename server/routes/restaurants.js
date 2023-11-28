@@ -1,12 +1,12 @@
 import express from 'express';
 import _ from 'lodash';
 const router = express.Router();
-import { Restaraunt, validate, validateUpdate } from '../models/restaurant';
-import auth from '../middleware/auth';
-import validateObjectId from '../middleware/validateObjectId';
+import { Restaraunt, validate, validateUpdate } from '../models/restaurant.js';
+import auth from '../middleware/auth.js';
+import validateObjectId from '../middleware/validateObjectId.js';
 import winston from 'winston';
 import mongoose from 'mongoose';
-import CountryCount from '../models/countryCount';
+import CountryCount from '../models/countryCount.js';
 const ObjectId = mongoose.Types.ObjectId;
 
 function parseDateQuery(dateStr, isEndDt) {
@@ -309,7 +309,7 @@ router.post('/', auth, async (req, res) => {
     } else {
       countryCount.wishlist++;
     }
-    countryCount.save();
+    await countryCount.save();
 
     const restrProps = _.pick(req.body, [
       'name',

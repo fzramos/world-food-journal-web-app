@@ -3,12 +3,12 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import winston from 'winston';
 import bodyParser from 'body-parser';
-import restaurants from '../routes/restaurants';
-import countryCounts from '../routes/countryCounts';
-import users from '../routes/user';
-import auth from '../routes/auth';
-import logout from '../routes/logout';
-import error from '../middleware/error';
+import restaurants from '../routes/restaurants.js';
+import countryCounts from '../routes/countryCounts.js';
+import users from '../routes/user.js';
+import auth from '../routes/auth.js';
+import logout from '../routes/logout.js';
+import error from '../middleware/error.js';
 
 export default function (app) {
   // required since some of the journal request will be large strings

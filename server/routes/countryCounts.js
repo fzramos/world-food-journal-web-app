@@ -2,8 +2,8 @@ import express from 'express';
 const router = express.Router();
 import _ from 'lodash';
 import mongoose from 'mongoose';
-import CountryCount from '../models/countryCount';
-import auth from '../middleware/auth';
+import CountryCount from '../models/countryCount.js';
+import auth from '../middleware/auth.js';
 import winston from 'winston';
 const ObjectId = mongoose.Types.ObjectId;
 

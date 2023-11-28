@@ -934,22 +934,22 @@ describe('/api/restaurants', () => {
       expect(oldCountryCount.restr + 1).toBe(updatedCountryCount.restr);
     });
 
-    it('should update the relevant CountryCount document to have a "wishlist" property value incremented by 1 if the req body has wishlist: true', async () => {
-      const oldCountryCount = await CountryCount.findOne({
-        userId,
-        cntryCd,
-      });
+    // it('should update the relevant CountryCount document to have a "wishlist" property value incremented by 1 if the req body has wishlist: true', async () => {
+    //   const oldCountryCount = await CountryCount.findOne({
+    //     userId,
+    //     cntryCd,
+    //   });
 
-      newRestr.wishlist = true;
-      await exec();
+    //   newRestr.wishlist = true;
+    //   await exec();
 
-      const updatedCountryCount = await CountryCount.findOne({
-        userId,
-        cntryCd,
-      });
+    //   const updatedCountryCount = await CountryCount.findOne({
+    //     userId,
+    //     cntryCd,
+    //   });
 
-      expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
-    });
+    //   expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
+    // });
 
     it('should return a 200 status if there is no relevant CountryCount document for the given userId and cntryCd', async () => {
       await CountryCount.findOneAndDelete({

@@ -2,6 +2,7 @@ import request from 'supertest';
 import { User } from '../../server/models/user';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import winston from 'winston';
 let server;
 
 describe('/api/auth', () => {

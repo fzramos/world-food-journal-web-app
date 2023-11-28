@@ -5,10 +5,9 @@ import express from 'express';
 import _ from 'lodash';
 const router = express.Router();
 import mongoose from 'mongoose';
-import { User, validate } from '../models/user';
-import winston from 'winston';
-import 'dotenv/config';
-import auth from '../middleware/auth';
+import { User, validate } from '../models/user.js';
+import 'dotenv/config.js';
+import auth from '../middleware/auth.js';
 
 router.get('/me', auth, async (req, res) => {
   // give users a simple route to get ONLY THEIR OWN user details
@@ -52,7 +51,7 @@ router.post('/register', async (req, res) => {
   const token = user.generateAuthToken();
 
   res
-    .header('x-auth-header', token)
+    .header('x-auth-token', token)
     .send(_.pick(user, ['_id', 'name', 'email']));
 });
 

@@ -1,7 +1,7 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
 import CountryCount from '../../server/models/countryCount';
-import { User } from '../../server/models/user';
+import { User } from '../../server/models/user.js';
 import winston from 'winston';
 import _ from 'lodash';
 let server;
@@ -113,8 +113,6 @@ describe('/api/country-counts', () => {
         .get(`/api/country-counts/${cntryCd}`)
         .set('x-auth-token', token);
     }
-
-    // need middlware to check if parameter ObjectID is valid
 
     it('should return status 200 if a request with a valid JWT is made', async () => {
       const res = await exec();

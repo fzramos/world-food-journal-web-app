@@ -30,6 +30,8 @@ const countryCountSchema = new mongoose.Schema({
   },
 });
 
+countryCountSchema.index({ userId: 1, cntryCd: 1 }, { unique: true });
+
 const CountryCount = mongoose.model('country_count', countryCountSchema);
 
 export default CountryCount;

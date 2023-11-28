@@ -46,7 +46,7 @@ userSchema.methods.generateAuthToken = function () {
   );
 };
 
-const User = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);
 
 // Joi purpose is to make sure API users get a clear error message if they
 // try to post faulty data, similar but not identical to the Mongoose schema
@@ -75,7 +75,14 @@ const validateUserAsync = async (user) => {
   return schema.validateAsync(user);
 };
 
-module.exports = {
-  User,
-  validate: validateUserAsync,
-};
+// module.exports = {
+//   User: User,
+//   validate: validateUserAsync,
+// };
+
+// export default {
+//   User: User,
+//   validate: validateUserAsync,
+// };
+export const validate = validateUserAsync;
+// export { User: User, validate: validateUserAsync }

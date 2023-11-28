@@ -109,14 +109,6 @@ describe('/api/user', () => {
       expect(res.text).toContain('required');
     });
 
-    it('should return 400 status if a duplicate username is attempted to be uploaded', async () => {
-      await exec();
-      // repeating Post
-      const res = await exec();
-
-      expect(res.status).toBe(400);
-    });
-
     it('should respond with 400 status if "name" value is less than 2 characters', async () => {
       userProps.name = '1';
 

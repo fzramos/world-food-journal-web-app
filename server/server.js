@@ -3,13 +3,15 @@ env();
 import express from 'express';
 import winston from 'winston';
 const app = express();
-import logging from './startup/logging';
+import logging from './startup/logging.js';
 logging();
-import db from './startup/db';
+import startupConfig from './startup/config.js';
+startupConfig();
+import db from './startup/db.js';
 db();
-import routes from './startup/routes';
+import routes from './startup/routes.js';
 routes(app);
-import validation from './startup/validation';
+import validation from './startup/validation.js';
 validation();
 
 app.get('/', (req, res) => {
