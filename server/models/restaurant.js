@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import Joi from 'joi';
 
-const restarauntSchema = new mongoose.Schema({
+const RestaurantSchema = new mongoose.Schema({
   name: {
     type: String,
     minLength: 1,
@@ -45,9 +45,15 @@ const restarauntSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  imgLinks: [
+    {
+      type: String,
+      max: 10000,
+    },
+  ],
 });
 
-const Restaraunt = mongoose.model('Restaraunt', restarauntSchema);
+const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
 
 // userId will not be in API call, it will be taken from the JWT of the request
 const validateRestaurant = (restr) => {
@@ -80,7 +86,7 @@ const validateRestaurantUpdate = (restr) => {
 };
 
 export {
-  Restaraunt,
+  Restaurant,
   validateRestaurant as validate,
   validateRestaurantUpdate as validateUpdate,
 };

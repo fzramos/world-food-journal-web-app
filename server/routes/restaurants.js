@@ -1,7 +1,7 @@
 import express from 'express';
 import _ from 'lodash';
 const router = express.Router();
-import { Restaraunt, validate, validateUpdate } from '../models/restaurant.js';
+import { Restaurant, validate, validateUpdate } from '../models/restaurant.js';
 import auth from '../middleware/auth.js';
 import validateObjectId from '../middleware/validateObjectId.js';
 import winston from 'winston';
@@ -78,22 +78,37 @@ router.get('/', auth, async (req, res) => {
     }
   }
 
-  const restrs = await Restaraunt.find(query).select('-__v');
+  const restrs = await Restaurant.find(query).select('-__v');
 
   if (!restrs)
     return res
-      .status(400)
+      .status(404)
       .send(
-        `No restaurant documents associated with username ${req.user.name}`
+        `No matching restaurant documents associated with username ${req.user.name}`
       );
 
   res.send(restrs);
 });
 
+router.get('/entities/:id', [validateObjectId, auth], async (req, res) => {
+  const objId = new ObjectId(req.user._id);
+
+  const Restaurants = await Restaurant.findOne({
+    _id: new ObjectId(req.params.id),
+    userId: objId,
+  }).select('-__v');
+
+  if (!Restaurants) {
+    return res.status(404).send('No records found');
+  }
+
+  return res.send(Restaurants);
+});
+
 // the function of this route can be done by the above GET / route with the cntryCd query param
 // just wanted a route that clearly denotes filtering by cntryCd since that is what the web app
 // will mostly require
-router.get('/:cntryCd', auth, async (req, res) => {
+router.get('/countryCodes/:cntryCd', auth, async (req, res) => {
   const objId = new ObjectId(req.user._id);
 
   const query = {
@@ -145,20 +160,20 @@ router.get('/:cntryCd', auth, async (req, res) => {
     }
   }
 
-  const restaraunts = await Restaraunt.find(query).select('-__v');
+  const Restaurants = await Restaurant.find(query).select('-__v');
 
-  if (!restaraunts) {
+  if (!Restaurants) {
     return res.status(400).send('No records found');
   }
 
-  return res.send(restaraunts);
+  return res.send(Restaurants);
 });
 
-router.delete('/:id', [auth, validateObjectId], async (req, res) => {
+router.delete('/entities/:id', [auth, validateObjectId], async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
   try {
-    const restr = await Restaraunt.findByIdAndDelete(req.params.id).select(
+    const restr = await Restaurant.findByIdAndDelete(req.params.id).select(
       '-__v'
     );
 
@@ -198,7 +213,7 @@ router.delete('/:id', [auth, validateObjectId], async (req, res) => {
   }
 });
 
-router.put('/:id', [auth, validateObjectId], async (req, res) => {
+router.put('/entities/:id', [auth, validateObjectId], async (req, res) => {
   try {
     await validateUpdate(req.body);
   } catch (err) {
@@ -211,7 +226,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
     const userId = new ObjectId(req.user._id);
 
     // Old restr document
-    let restr = await Restaraunt.findOne({
+    let restr = await Restaurant.findOne({
       _id: req.params.id,
       userId: userId,
     });
@@ -240,7 +255,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
 
     // can't use findByIdAndUpdate because users should only be able to modify
     // their own data
-    restr = await Restaraunt.findOneAndUpdate(
+    restr = await Restaurant.findOneAndUpdate(
       {
         _id: req.params.id,
         userId: req.user._id,
@@ -322,7 +337,7 @@ router.post('/', auth, async (req, res) => {
     ]);
     restrProps.userId = userId;
 
-    const restr = new Restaraunt(restrProps);
+    const restr = new Restaurant(restrProps);
     restr.save();
 
     res.send(
