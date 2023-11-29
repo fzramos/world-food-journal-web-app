@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { Restaraunt } from '../../server/models/restaurant';
+import { Restaurant } from '../../server/models/restaurant';
 import mongoose from 'mongoose';
 import { User } from '../../server/models/user';
 import CountryCount from '../../server/models/countryCount';
@@ -44,14 +44,13 @@ describe('/api/restaurants', () => {
       _id: cntryCdObjectId,
       cntryCd: cntryCd,
       userId: userId,
-      date: date7dAgo,
       restr: 2,
       hm: 1,
       misc: 1,
       wishlist: 1,
     });
 
-    await Restaraunt.insertMany([
+    await Restaurant.insertMany([
       {
         _id: restrId,
         name: 'A',
@@ -84,7 +83,7 @@ describe('/api/restaurants', () => {
   });
   afterEach(async () => {
     await server.close();
-    await Restaraunt.deleteMany({});
+    await Restaurant.deleteMany({});
     await CountryCount.deleteMany({});
   });
   afterAll(() => {
@@ -228,7 +227,7 @@ describe('/api/restaurants', () => {
       date3dAgo.setUTCHours(0, 0, 0, 0);
 
       // inserting a restr record with a date 3 days in the past
-      await Restaraunt.create({
+      await Restaurant.create({
         name: 'D',
         userId,
         rating: 4,
@@ -260,10 +259,10 @@ describe('/api/restaurants', () => {
     });
   });
 
-  describe('GET /:cntryCd', () => {
+  describe('GET /countryCodes/:cntryCd', () => {
     let query;
     beforeEach(async () => {
-      await Restaraunt.create({
+      await Restaurant.create({
         name: 'D',
         userId,
         rating: 5,
@@ -277,13 +276,13 @@ describe('/api/restaurants', () => {
     });
     function exec() {
       return request(server)
-        .get(`/api/restaurants/${cntryCd}`)
+        .get(`/api/restaurants/countryCodes/${cntryCd}`)
         .set('x-auth-token', token);
     }
 
     function execQuery() {
       return request(server)
-        .get(`/api/restaurants/${cntryCd}`)
+        .get(`/api/restaurants/countryCodes/${cntryCd}`)
         .query(query)
         .set('x-auth-token', token);
     }
@@ -386,7 +385,7 @@ describe('/api/restaurants', () => {
       date3dAgo.setUTCHours(0, 0, 0, 0);
       const newId = new mongoose.Types.ObjectId();
       // inserting a restr record with a date 3 days in the past
-      await Restaraunt.create({
+      await Restaurant.create({
         _id: newId,
         name: 'D',
         userId,
@@ -416,10 +415,50 @@ describe('/api/restaurants', () => {
     });
   });
 
-  describe('DELETE /:restrId', () => {
+  describe('GET /entities/:restrId', () => {
     function exec() {
       return request(server)
-        .delete(`/api/restaurants/${restrId}`)
+        .get(`/api/restaurants/entities/${restrId.toHexString()}`)
+        .set('x-auth-token', token);
+    }
+    it('should status 401 if an API call is made without a valid auth token', async () => {
+      token = '';
+      const res = await exec();
+
+      expect(res.status).toBe(401);
+    });
+    it('should return a 200 status if a valid API call is made', async () => {
+      const res = await exec();
+
+      expect(res.status).toBe(200);
+    });
+    it('should return the correct document details if a valid API call is made', async () => {
+      const res = await exec();
+      expect(res.body._id).toBe(restrId.toHexString());
+      expect(res.body).toMatchObject({
+        name: 'A',
+        userId: userId.toHexString(),
+        rating: 3,
+        cntryCd: cntryCd,
+        note: 'Decent',
+        location: 'New York City',
+        wishlist: true,
+      });
+    });
+
+    it('should return a 400 status if an invalid ObjectId is passed as an "id" query parameter value', async () => {
+      const res = await request(server)
+        .get(`/api/restaurants/entities/a`)
+        .set('x-auth-token', token);
+
+      expect(res.status).toBe(400);
+    });
+  });
+
+  describe('DELETE /entities/:restrId', () => {
+    function exec() {
+      return request(server)
+        .delete(`/api/restaurants/entities/${restrId}`)
         .set('x-auth-token', token);
     }
 
@@ -454,7 +493,7 @@ describe('/api/restaurants', () => {
     it('should delete the requested document from the Restaurant collection', async () => {
       await exec();
 
-      const result = await Restaraunt.findById(restrId);
+      const result = await Restaurant.findById(restrId);
 
       expect(result).toBeNull();
     });
@@ -479,7 +518,7 @@ describe('/api/restaurants', () => {
 
     it('should update the relevant CountryCount document to have its "wishlist" property value decremented by 1 the restr doc\'s wishlist property was true if a call is made with a valid JWT', async () => {
       // updating doc to be a wishlist=true
-      await Restaraunt.findByIdAndUpdate(
+      await Restaurant.findByIdAndUpdate(
         restrId,
         {
           $set: { wishlist: true },
@@ -511,7 +550,7 @@ describe('/api/restaurants', () => {
     });
   });
 
-  describe('PUT /:restrId', () => {
+  describe('PUT /entities/:restrId', () => {
     let updatedRestr;
 
     beforeEach(() => {
@@ -527,7 +566,7 @@ describe('/api/restaurants', () => {
 
     function exec() {
       return request(server)
-        .put(`/api/restaurants/${restrId}`)
+        .put(`/api/restaurants/entities/${restrId}`)
         .set('x-auth-token', token)
         .send(updatedRestr);
     }
@@ -565,7 +604,7 @@ describe('/api/restaurants', () => {
     it('should update the requested document from the Restaurant collection', async () => {
       await exec();
 
-      const result = await Restaraunt.findById(restrId);
+      const result = await Restaurant.findById(restrId);
 
       expect(result).toMatchObject(updatedRestr);
     });
@@ -686,7 +725,7 @@ describe('/api/restaurants', () => {
       updatedRestr = { wishlist: false };
       await exec();
 
-      const result = await Restaraunt.findById(restrId);
+      const result = await Restaurant.findById(restrId);
 
       expect(result.wishlist).toBe(false);
     });
@@ -779,7 +818,7 @@ describe('/api/restaurants', () => {
     it('should create a document Restaurant collection with matching parameters', async () => {
       await exec();
 
-      const result = await Restaraunt.findOne(newRestr);
+      const result = await Restaurant.findOne(newRestr);
 
       expect(result).toBeDefined();
       // expect(result).toMatchObject(newRestr);
@@ -934,22 +973,22 @@ describe('/api/restaurants', () => {
       expect(oldCountryCount.restr + 1).toBe(updatedCountryCount.restr);
     });
 
-    // it('should update the relevant CountryCount document to have a "wishlist" property value incremented by 1 if the req body has wishlist: true', async () => {
-    //   const oldCountryCount = await CountryCount.findOne({
-    //     userId,
-    //     cntryCd,
-    //   });
+    it('should update the relevant CountryCount document to have a "wishlist" property value incremented by 1 if the req body has wishlist: true', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
 
-    //   newRestr.wishlist = true;
-    //   await exec();
+      newRestr.wishlist = true;
+      await exec();
 
-    //   const updatedCountryCount = await CountryCount.findOne({
-    //     userId,
-    //     cntryCd,
-    //   });
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
 
-    //   expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
-    // });
+      expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
+    });
 
     it('should return a 200 status if there is no relevant CountryCount document for the given userId and cntryCd', async () => {
       await CountryCount.findOneAndDelete({
@@ -1008,7 +1047,7 @@ describe('/api/restaurants', () => {
     //   newRestr = { wishlist: false };
     //   await exec();
 
-    //   const result = await Restaraunt.findById(restrId);
+    //   const result = await Restaurant.findById(restrId);
 
     //   expect(result.wishlist).toBe(false);
     // });

@@ -7,6 +7,7 @@ import restaurants from '../routes/restaurants.js';
 import countryCounts from '../routes/countryCounts.js';
 import users from '../routes/user.js';
 import auth from '../routes/auth.js';
+import image from '../routes/image.js';
 import logout from '../routes/logout.js';
 import error from '../middleware/error.js';
 
@@ -31,6 +32,7 @@ export default function (app) {
   app.use('/api/user', users);
   app.use('/api/auth', auth);
   app.use('/api/logout', logout);
+  app.use('/api/image', image);
 
   app.use(error);
 }
