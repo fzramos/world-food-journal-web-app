@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import Joi from 'joi';
 
-const RestaurantSchema = new mongoose.Schema({
+const RestaurantSchema = new Schema({
   name: {
     type: String,
     minLength: 1,
@@ -10,7 +10,7 @@ const RestaurantSchema = new mongoose.Schema({
     required: true,
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
     ref: 'User',
   },
@@ -22,7 +22,7 @@ const RestaurantSchema = new mongoose.Schema({
   },
   date: {
     type: Date, // not necessarily the same as entry upload date
-    default: () => new Date(Date.now()).setUTCHours(0, 0, 0, 0),
+    default: () => new Date().setUTCHours(0, 0, 0, 0),
   },
   cntryCd: {
     type: String,
@@ -53,7 +53,7 @@ const RestaurantSchema = new mongoose.Schema({
   ],
 });
 
-const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
+const Restaurant = model('Restaurant', RestaurantSchema);
 
 // userId will not be in API call, it will be taken from the JWT of the request
 const validateRestaurant = (restr) => {

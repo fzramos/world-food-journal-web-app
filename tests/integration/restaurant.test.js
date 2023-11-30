@@ -18,6 +18,7 @@ describe('/api/restaurants', () => {
   let date6dAgo;
   let dateOnedAgo;
   let currentDate;
+  let query;
 
   beforeEach(async () => {
     const { default: myServer } = await import('../../server/server');
@@ -29,15 +30,11 @@ describe('/api/restaurants', () => {
     cntryCdObjectId = new mongoose.Types.ObjectId();
     restrId = new mongoose.Types.ObjectId();
     currentDate = new Date();
-    dateOnedAgo = new Date();
-    date7dAgo = new Date();
-    date6dAgo = new Date();
-    dateOnedAgo.setUTCDate(currentDate.getDate() - 1);
+    dateOnedAgo = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
     dateOnedAgo.setUTCHours(0, 0, 0, 0);
-    currentDate.setUTCHours(0, 0, 0, 0);
-    date7dAgo.setUTCDate(currentDate.getDate() - 7);
+    date7dAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
     date7dAgo.setUTCHours(0, 0, 0, 0);
-    date6dAgo.setUTCDate(currentDate.getDate() - 6);
+    date6dAgo = new Date(currentDate.getTime() - 6 * 24 * 60 * 60 * 1000);
     date6dAgo.setUTCHours(0, 0, 0, 0);
     // insert 1 into countryCount
     await CountryCount.create({
@@ -91,9 +88,17 @@ describe('/api/restaurants', () => {
   });
 
   describe('GET /', () => {
+    beforeEach(() => {
+      query = {};
+    });
+
     function exec() {
-      return request(server).get('/api/restaurants').set('x-auth-token', token);
+      return request(server)
+        .get('/api/restaurants')
+        .query(query)
+        .set('x-auth-token', token);
     }
+
     it('should return a 200 status if a valid API request is made', async () => {
       const res = await exec();
 
@@ -124,57 +129,85 @@ describe('/api/restaurants', () => {
     });
 
     it('should return all documents for the user that match the wishlist query parameter if a valid API call is made', async () => {
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ wishlist: true })
-        .set('x-auth-token', token);
-      expect(res.body).toHaveLength(1);
+      query = { wishlist: true };
+      const res = await exec();
 
+      expect(res.body).toHaveLength(1);
       expect(res.body[0].wishlist).toBe(true);
     });
 
-    it('should return all documents for the user that have a rating greater or equal to the rating query parameter value if a valid API call is made', async () => {
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ rating: 4 })
-        .set('x-auth-token', token);
+    it('should return all documents for the user and cntryCd that have a rating equal to or larger than the value from the minRating query parameter value', async () => {
+      query = { minRating: 4 };
+      const res = await exec();
+
       expect(res.body).toHaveLength(1);
       expect(res.body[0].rating).toBeGreaterThanOrEqual(4);
     });
 
+    it('should return all documents for the user and cntryCd that have a rating less than or equal to the value from the maxRating query parameter value', async () => {
+      query = { maxRating: 3 };
+      const res = await exec();
+
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].rating).toBeLessThanOrEqual(3);
+    });
+
+    it('should return all documents for the user and cntryCd that have a rating within the range as specified by the minRating and maxRating query parameter value', async () => {
+      query = { minRating: 4, maxRating: 5 };
+      const res = await exec();
+
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].rating).toBe(4);
+    });
+
+    it('should return a status 400 code if the maxRating query parameter value is invalid', async () => {
+      query = { maxRating: 'a' };
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/maxRating/i);
+    });
+
+    it('should return a status 400 code if the minRating query parameter value is invalid', async () => {
+      query = { minRating: 'a' };
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/minRating/i);
+    });
+
     it('should return all documents for the user that have a coutry code matching the cntryCd query parameter value if a valid API call is made', async () => {
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ cntryCd: cntryCd })
-        .set('x-auth-token', token);
+      query = { cntryCd: cntryCd };
+      const res = await exec();
+
       expect(res.body).toHaveLength(1);
       expect(res.body[0].cntryCd).toBe(cntryCd);
     });
 
     it('should return all documents for the user that have a name containing the substring from the name query parameter value if a valid API call is made', async () => {
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ name: 'a' })
-        .set('x-auth-token', token);
+      query = { name: 'a' };
+
+      const res = await exec();
+
       expect(res.body).toHaveLength(1);
       expect(res.body[0].name).toMatch(/a/i);
     });
 
     it('should return a 400 error with a descriptive message if an invalid minDateUTC query param value is passed', async () => {
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ minDateUTC: 'aaa' })
-        .set('x-auth-token', token);
+      query = { minDateUTC: 'aaa' };
+      const res = await exec();
+      // request(server)
+      //   .get(`/api/restaurants`)
+      //   .query({ minDateUTC: 'aaa' })
+      //   .set('x-auth-token', token);
       expect(res.status).toBe(400);
       expect(res.text).toContain('date');
       expect(res.text).toContain('invalid');
     });
 
     it('should return a 400 error with a descriptive message if an invalid maxDateUTC query param value is passed', async () => {
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ maxDateUTC: 'aaa' })
-        .set('x-auth-token', token);
+      query = { maxDateUTC: 'aaa' };
+      const res = await exec();
 
       expect(res.status).toBe(400);
       expect(res.text).toContain('date');
@@ -188,16 +221,14 @@ describe('/api/restaurants', () => {
         .toISOString()
         .replace('T', ' ')
         .substring(0, 10);
+      query = { minDateUTC: date6dAgoString };
 
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ minDateUTC: date6dAgoString })
-        .set('x-auth-token', token);
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0]._id).toBe(restrId.toHexString());
-      expect(new Date(res.body[0].date).getTime()).toBeGreaterThan(
-        date7dAgo.getTime()
+      expect(new Date(res.body[0].date).getTime()).toBeGreaterThanOrEqual(
+        date6dAgo.getTime()
       );
     });
 
@@ -208,11 +239,8 @@ describe('/api/restaurants', () => {
         .toISOString()
         .replace('T', ' ')
         .substring(0, 10);
-
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({ maxDateUTC: dateOnedAgoString })
-        .set('x-auth-token', token);
+      query = { maxDateUTC: dateOnedAgoString };
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0]._id).not.toBe(restrId.toHexString());
@@ -245,14 +273,11 @@ describe('/api/restaurants', () => {
         .toISOString()
         .replace('T', ' ')
         .substring(0, 10);
-
-      const res = await request(server)
-        .get(`/api/restaurants`)
-        .query({
-          minDateUTC: date6dAgoString,
-          maxDateUTC: dateOnedAgoString,
-        })
-        .set('x-auth-token', token);
+      query = {
+        minDateUTC: date6dAgoString,
+        maxDateUTC: dateOnedAgoString,
+      };
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0].name).toBe('D');
@@ -260,7 +285,6 @@ describe('/api/restaurants', () => {
   });
 
   describe('GET /countryCodes/:cntryCd', () => {
-    let query;
     beforeEach(async () => {
       await Restaurant.create({
         name: 'D',
@@ -275,12 +299,6 @@ describe('/api/restaurants', () => {
       query = {};
     });
     function exec() {
-      return request(server)
-        .get(`/api/restaurants/countryCodes/${cntryCd}`)
-        .set('x-auth-token', token);
-    }
-
-    function execQuery() {
       return request(server)
         .get(`/api/restaurants/countryCodes/${cntryCd}`)
         .query(query)
@@ -317,7 +335,7 @@ describe('/api/restaurants', () => {
 
     it('should return all documents for the user and cntryCd that match the wishlist query parameter', async () => {
       query = { wishlist: true };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0].wishlist).toBe(true);
@@ -325,15 +343,55 @@ describe('/api/restaurants', () => {
 
     it('should return all documents for the user and cntryCd that have a name containing the substring from the name query parameter value', async () => {
       query = { name: 'D' };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0].name).toMatch(/d/i);
     });
 
+    it('should return all documents for the user and cntryCd that have a rating equal to or larger than the value from the minRating query parameter value', async () => {
+      query = { minRating: 5 };
+      const res = await exec();
+
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].rating).toBeGreaterThanOrEqual(5);
+    });
+
+    it('should return all documents for the user and cntryCd that have a rating less than or equal to the value from the maxRating query parameter value', async () => {
+      query = { maxRating: 3 };
+      const res = await exec();
+
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].rating).toBeLessThanOrEqual(3);
+    });
+
+    it('should return all documents for the user and cntryCd that have a rating within the range as specified by the minRating and maxRating query parameter value', async () => {
+      query = { minRating: 4, maxRating: 5 };
+      const res = await exec();
+
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].rating).toBe(5);
+    });
+
+    it('should return a status 400 code if the maxRating query parameter value is invalid', async () => {
+      query = { maxRating: 'a' };
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/maxRating/i);
+    });
+
+    it('should return a status 400 code if the minRating query parameter value is invalid', async () => {
+      query = { minRating: 'a' };
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/minRating/i);
+    });
+
     it('should return a 400 error with a descriptive message if an invalid minDateUTC query param value is passed', async () => {
       query = { minDateUTC: 'asdfa' };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.status).toBe(400);
       expect(res.text).toContain('date');
@@ -342,7 +400,7 @@ describe('/api/restaurants', () => {
 
     it('should return a 400 error with a descriptive message if an invalid maxDateUTC query param value is passed', async () => {
       query = { maxDateUTC: 'asdfa' };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.status).toBe(400);
       expect(res.text).toContain('date');
@@ -355,12 +413,12 @@ describe('/api/restaurants', () => {
         .replace('T', ' ')
         .substring(0, 10);
       query = { minDateUTC: date6dAgoString };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0]._id).toBe(restrId.toHexString());
-      expect(new Date(res.body[0].date).getTime()).toBeGreaterThan(
-        date7dAgo.getTime()
+      expect(new Date(res.body[0].date).getTime()).toBeGreaterThanOrEqual(
+        date6dAgo.getTime()
       );
     });
 
@@ -370,7 +428,7 @@ describe('/api/restaurants', () => {
         .replace('T', ' ')
         .substring(0, 10);
       query = { maxDateUTC: dateOnedAgoString };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0]._id).not.toBe(restrId.toHexString());
@@ -408,7 +466,7 @@ describe('/api/restaurants', () => {
         minDateUTC: date6dAgoString,
         maxDateUTC: dateOnedAgoString,
       };
-      const res = await execQuery();
+      const res = await exec();
 
       expect(res.body).toHaveLength(1);
       expect(res.body[0]._id).toBe(newId.toHexString());
@@ -421,17 +479,27 @@ describe('/api/restaurants', () => {
         .get(`/api/restaurants/entities/${restrId.toHexString()}`)
         .set('x-auth-token', token);
     }
+
     it('should status 401 if an API call is made without a valid auth token', async () => {
       token = '';
       const res = await exec();
 
       expect(res.status).toBe(401);
     });
+
+    it('should status 404 if a non-existent entity ID is passed', async () => {
+      restrId = new mongoose.Types.ObjectId();
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
     it('should return a 200 status if a valid API call is made', async () => {
       const res = await exec();
 
       expect(res.status).toBe(200);
     });
+
     it('should return the correct document details if a valid API call is made', async () => {
       const res = await exec();
       expect(res.body._id).toBe(restrId.toHexString());
@@ -470,6 +538,14 @@ describe('/api/restaurants', () => {
       expect(res.status).toBe(401);
     });
 
+    it('should return a 404 status if a call is made to a document with a different userId then that within the JWT', async () => {
+      token = new User().generateAuthToken();
+
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
     it('should return a 200 status if a call is made with a valid JWT', async () => {
       const res = await exec();
       expect(res.status).toBe(200);
@@ -487,9 +563,10 @@ describe('/api/restaurants', () => {
       restrId = new mongoose.Types.ObjectId();
       const res = await exec();
 
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(404);
       expect(res.text).toMatch(/id/i);
     });
+
     it('should delete the requested document from the Restaurant collection', async () => {
       await exec();
 
@@ -505,6 +582,14 @@ describe('/api/restaurants', () => {
     });
 
     it('should update the relevant CountryCount document to have its "restr" property value decremented by 1 the restr doc\'s wishlist property was false if a call is made with a valid JWT', async () => {
+      // updating doc to be a wishlist=false
+      await Restaurant.findByIdAndUpdate(
+        restrId,
+        {
+          $set: { wishlist: false },
+        },
+        {}
+      );
       const oldCountryCount = await CountryCount.findOne({
         userId,
         cntryCd,
@@ -514,18 +599,11 @@ describe('/api/restaurants', () => {
         userId,
         cntryCd,
       });
+
+      expect(oldCountryCount.restr - 1).toBe(updatedCountryCount.wishlist);
     });
 
     it('should update the relevant CountryCount document to have its "wishlist" property value decremented by 1 the restr doc\'s wishlist property was true if a call is made with a valid JWT', async () => {
-      // updating doc to be a wishlist=true
-      await Restaurant.findByIdAndUpdate(
-        restrId,
-        {
-          $set: { wishlist: true },
-        },
-        {}
-      );
-
       const oldCountryCount = await CountryCount.findOne({
         userId,
         cntryCd,
@@ -585,6 +663,12 @@ describe('/api/restaurants', () => {
       expect(res.status).toBe(200);
     });
 
+    it('should return an object matching the request object', async () => {
+      const res = await exec();
+
+      expect(res.body).toMatchObject(updatedRestr);
+    });
+
     it('should return as 400 status and descriptive error message if an invalid ObjectId is passed', async () => {
       restrId = 'a';
       const res = await exec();
@@ -593,11 +677,18 @@ describe('/api/restaurants', () => {
       expect(res.text).toMatch(/id/i);
     });
 
-    it('should return as 400 status if an valid but non-existent ObjectId is passed', async () => {
+    it('should return a 404 status if a call is made to a document with a different userId then that within the JWT', async () => {
+      token = new User().generateAuthToken();
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it('should return as 404 status if an valid but non-existent ObjectId is passed', async () => {
       restrId = new mongoose.Types.ObjectId();
       const res = await exec();
 
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(404);
       expect(res.text).toMatch(/id/i);
     });
 
@@ -711,9 +802,6 @@ describe('/api/restaurants', () => {
       expect(res.text).toContain('boolean');
     });
 
-    // CRITICAL TESTS as updating a restr document's wishlist status from true to false
-    // will be the most common update. Which represents turning a restaurant you've been
-    // planning to go to into a restr you've been to and want to journal about
     it('should return an successfully updated object if only wishlist req.body property object is passed', async () => {
       updatedRestr = { wishlist: false };
       const res = await exec();
@@ -805,6 +893,19 @@ describe('/api/restaurants', () => {
       expect(res.status).toBe(200);
     });
 
+    it('should return an object matching the request object', async () => {
+      const res = await exec();
+
+      expect(res.body).toMatchObject({
+        name: 'Ab',
+        rating: 5,
+        cntryCd: cntryCd,
+        note: 'Great',
+        location: 'New York City',
+        wishlist: false,
+      });
+    });
+
     it('should return a 400 status and descriptive message if a call is made userId req.body prop', async () => {
       newRestr.userId = userId;
       // this will be set by looking at req JWT userId
@@ -821,7 +922,14 @@ describe('/api/restaurants', () => {
       const result = await Restaurant.findOne(newRestr);
 
       expect(result).toBeDefined();
-      // expect(result).toMatchObject(newRestr);
+      expect(result).toMatchObject({
+        name: 'Ab',
+        rating: 5,
+        cntryCd: cntryCd,
+        note: 'Great',
+        location: 'New York City',
+        wishlist: false,
+      });
     });
 
     it('should return the created document from the Restaurant collection', async () => {
@@ -1033,23 +1141,5 @@ describe('/api/restaurants', () => {
       expect(createdCountryCount.restr).toBe(0);
       expect(createdCountryCount.wishlist).toBe(1);
     });
-
-    //  WISHLIST: Wishlist: true should not update CountryCode restr count but wishlist count
-
-    // it('should return an successfully updated object if only wishlist req.body property object is passed', async () => {
-    //   newRestr = { wishlist: false };
-    //   const res = await exec();
-
-    //   expect(res.body.wishlist).toBe(false);
-    // });
-
-    // it('should update the relevant MongoDB document if an object with only a wishlist req.body property is passed', async () => {
-    //   newRestr = { wishlist: false };
-    //   await exec();
-
-    //   const result = await Restaurant.findById(restrId);
-
-    //   expect(result.wishlist).toBe(false);
-    // });
   });
 });

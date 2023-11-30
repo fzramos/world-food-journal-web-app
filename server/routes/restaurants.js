@@ -1,13 +1,13 @@
-import express from 'express';
-import _ from 'lodash';
-const router = express.Router();
+import { Router } from 'express';
+import { setWith, merge, pick } from 'lodash';
+const router = Router();
 import { Restaurant, validate, validateUpdate } from '../models/restaurant.js';
 import auth from '../middleware/auth.js';
 import validateObjectId from '../middleware/validateObjectId.js';
 import winston from 'winston';
-import mongoose from 'mongoose';
+import { Types, startSession } from 'mongoose';
 import CountryCount from '../models/countryCount.js';
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId = Types.ObjectId;
 
 function parseDateQuery(dateStr, isEndDt) {
   const dateObj = new Date(dateStr);
@@ -26,6 +26,10 @@ function parseDateQuery(dateStr, isEndDt) {
   }
 }
 
+function isNumeric(str) {
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
 router.get('/', auth, async (req, res) => {
   const objId = new ObjectId(req.user._id);
   const query = { userId: objId };
@@ -34,8 +38,28 @@ router.get('/', auth, async (req, res) => {
     query.wishlist = req.query.wishlist === 'true';
   }
 
-  if (req.query.rating) {
-    query.rating = { $gte: parseInt(req.query.rating) };
+  if (req.query.minRating) {
+    if (isNumeric(req.query.minRating)) {
+      setWith(query, ['rating', '$gte'], parseInt(req.query.minRating));
+    } else {
+      return res
+        .status(400)
+        .send(
+          `minRating query parameter has an invalid format, please use an interger between 0 and 5`
+        );
+    }
+  }
+
+  if (req.query.maxRating) {
+    if (isNumeric(req.query.maxRating)) {
+      setWith(query, ['rating', '$lte'], parseInt(req.query.maxRating));
+    } else {
+      return res
+        .status(400)
+        .send(
+          `maxRating query parameter has an invalid format, please use an interger between 0 and 5`
+        );
+    }
   }
 
   if (req.query.cntryCd) {
@@ -48,7 +72,7 @@ router.get('/', auth, async (req, res) => {
 
   if (req.query.minDateUTC) {
     try {
-      _.setWith(
+      setWith(
         query,
         ['date', '$gte'],
         parseDateQuery(req.query.minDateUTC, false)
@@ -64,7 +88,7 @@ router.get('/', auth, async (req, res) => {
 
   if (req.query.maxDateUTC) {
     try {
-      _.setWith(
+      setWith(
         query,
         ['date', '$lte'],
         parseDateQuery(req.query.maxDateUTC, true)
@@ -80,29 +104,24 @@ router.get('/', auth, async (req, res) => {
 
   const restrs = await Restaurant.find(query).select('-__v');
 
-  if (!restrs)
-    return res
-      .status(404)
-      .send(
-        `No matching restaurant documents associated with username ${req.user.name}`
-      );
-
   res.send(restrs);
 });
 
 router.get('/entities/:id', [validateObjectId, auth], async (req, res) => {
   const objId = new ObjectId(req.user._id);
 
-  const Restaurants = await Restaurant.findOne({
+  const restr = await Restaurant.findOne({
     _id: new ObjectId(req.params.id),
     userId: objId,
   }).select('-__v');
 
-  if (!Restaurants) {
-    return res.status(404).send('No records found');
+  if (!restr) {
+    return res
+      .status(404)
+      .send('No record matching ID ${req.params.id} for ${req.user.name}');
   }
 
-  return res.send(Restaurants);
+  res.json(restr);
 });
 
 // the function of this route can be done by the above GET / route with the cntryCd query param
@@ -120,8 +139,28 @@ router.get('/countryCodes/:cntryCd', auth, async (req, res) => {
     query.wishlist = req.query.wishlist === 'true';
   }
 
-  if (req.query.rating) {
-    query.rating = { $gte: parseInt(req.query.rating) };
+  if (req.query.minRating) {
+    if (isNumeric(req.query.minRating)) {
+      setWith(query, ['rating', '$gte'], parseInt(req.query.minRating));
+    } else {
+      return res
+        .status(400)
+        .send(
+          `minRating query parameter has an invalid format, please use an interger between 0 and 5`
+        );
+    }
+  }
+
+  if (req.query.maxRating) {
+    if (isNumeric(req.query.maxRating)) {
+      setWith(query, ['rating', '$lte'], parseInt(req.query.maxRating));
+    } else {
+      return res
+        .status(400)
+        .send(
+          `maxRating query parameter has an invalid format, please use an interger between 0 and 5`
+        );
+    }
   }
 
   if (req.query.name) {
@@ -130,7 +169,7 @@ router.get('/countryCodes/:cntryCd', auth, async (req, res) => {
 
   if (req.query.minDateUTC) {
     try {
-      _.setWith(
+      setWith(
         query,
         ['date', '$gte'],
         parseDateQuery(req.query.minDateUTC, false)
@@ -146,7 +185,7 @@ router.get('/countryCodes/:cntryCd', auth, async (req, res) => {
 
   if (req.query.maxDateUTC) {
     try {
-      _.setWith(
+      setWith(
         query,
         ['date', '$lte'],
         parseDateQuery(req.query.maxDateUTC, true)
@@ -160,27 +199,26 @@ router.get('/countryCodes/:cntryCd', auth, async (req, res) => {
     }
   }
 
-  const Restaurants = await Restaurant.find(query).select('-__v');
+  const restrs = await Restaurant.find(query).select('-__v');
 
-  if (!Restaurants) {
-    return res.status(400).send('No records found');
-  }
-
-  return res.send(Restaurants);
+  return res.send(restrs);
 });
 
 router.delete('/entities/:id', [auth, validateObjectId], async (req, res) => {
-  const session = await mongoose.startSession();
+  const session = await startSession();
   session.startTransaction();
   try {
-    const restr = await Restaurant.findByIdAndDelete(req.params.id).select(
-      '-__v'
-    );
+    const restr = await Restaurant.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user._id,
+    }).select('-__v');
 
     if (!restr)
       return res
-        .status(400)
-        .send(`Restaurant record with ID ${req.params.id} not found`);
+        .status(404)
+        .send(
+          `Restaurant record with ID ${req.params.id} not found for user ${req.user.name}`
+        );
 
     const userId = new ObjectId(req.user._id);
     let countryCount = await CountryCount.findOne({
@@ -190,9 +228,9 @@ router.delete('/entities/:id', [auth, validateObjectId], async (req, res) => {
 
     if (!countryCount) {
       winston.error(
-        `User id ${req.user._id} and cntryCd ${req.body.cntryCd} combination have Restaurant document but not a CountryCd collection value. Please review.`
+        `User id ${req.user._id} and cntryCd ${restr.cntryCd} combination have a Restaurant document but not a CountryCd collection value. Please review.`
       );
-      return res.status(400).send(`Problem in deleting restaurant record`);
+      throw new Error('Problem in deleting restaurant record');
     } else if (restr.wishlist) {
       countryCount.wishlist--;
       await countryCount.save();
@@ -205,9 +243,9 @@ router.delete('/entities/:id', [auth, validateObjectId], async (req, res) => {
     await session.commitTransaction();
   } catch (err) {
     await session.abortTransaction();
-    res
-      .status(400)
-      .send(`Error posting the restaurant record, Error ${err._message}`);
+    winston.info('Error deleting the restaurant record');
+    winston.error(err);
+    res.status(400).send(`Error deleting the restaurant record, Error ${err}`);
   } finally {
     session.endSession();
   }
@@ -220,7 +258,7 @@ router.put('/entities/:id', [auth, validateObjectId], async (req, res) => {
     return res.status(400).send(err.details[0].message);
   }
 
-  const session = await mongoose.startSession();
+  const session = await startSession();
   session.startTransaction();
   try {
     const userId = new ObjectId(req.user._id);
@@ -233,7 +271,7 @@ router.put('/entities/:id', [auth, validateObjectId], async (req, res) => {
 
     if (!restr)
       return res
-        .status(400)
+        .status(404)
         .send(
           `Restaurant record with ID ${req.params.id} not found or not associated with user ${req.user._id}`
         );
@@ -255,26 +293,19 @@ router.put('/entities/:id', [auth, validateObjectId], async (req, res) => {
 
     // can't use findByIdAndUpdate because users should only be able to modify
     // their own data
-    restr = await Restaurant.findOneAndUpdate(
-      {
-        _id: req.params.id,
-        userId: req.user._id,
-      },
-      {
-        $set: _.pick(req.body, [
-          'name',
-          'rating',
-          'date',
-          'cntryCd',
-          'note',
-          'location',
-          'wishlist',
-        ]),
-      },
-      {
-        new: true,
-      }
+    restr = merge(
+      restr,
+      pick(req.body, [
+        'name',
+        'rating',
+        'date',
+        'cntryCd',
+        'note',
+        'location',
+        'wishlist',
+      ])
     );
+    await restr.save();
 
     res.send(restr);
     await session.commitTransaction();
@@ -297,7 +328,7 @@ router.post('/', auth, async (req, res) => {
 
   // need a session since when I post here, I need to update the countryCount collection as well
   // if Restaurant post fails, I don't want to update the countryCount
-  const session = await mongoose.startSession();
+  const session = await startSession();
   session.startTransaction();
   try {
     const userId = new ObjectId(req.user._id);
@@ -326,7 +357,7 @@ router.post('/', auth, async (req, res) => {
     }
     await countryCount.save();
 
-    const restrProps = _.pick(req.body, [
+    const restrProps = pick(req.body, [
       'name',
       'rating',
       'date',
@@ -341,7 +372,7 @@ router.post('/', auth, async (req, res) => {
     restr.save();
 
     res.send(
-      _.pick(restr, [
+      pick(restr, [
         '_id',
         'name',
         'rating',
