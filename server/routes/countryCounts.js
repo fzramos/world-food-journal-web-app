@@ -16,7 +16,6 @@ router.get('/', auth, async (req, res) => {
     '-__v'
   );
 
-  if (!countryCounts) return res.status(401).send('abc');
   res.send(countryCounts);
 });
 
@@ -29,7 +28,7 @@ router.get('/:cntryCd', auth, async (req, res) => {
 
   if (!countryCount)
     return res
-      .status(400)
+      .status(404)
       .send(
         `Country count for username ${req.user.name} and country code ${req.params.cntryCd} not found.`
       );

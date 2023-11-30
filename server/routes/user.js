@@ -7,6 +7,7 @@ const router = express.Router();
 import mongoose from 'mongoose';
 import { User, validate } from '../models/user.js';
 import 'dotenv/config.js';
+import winston from 'winston';
 import auth from '../middleware/auth.js';
 
 router.get('/me', auth, async (req, res) => {
@@ -34,13 +35,13 @@ router.post('/register', async (req, res) => {
       .send(
         `The username "${req.body.name}" is already registered to a different account`
       );
-  // safety step to make sure user doesn't maliciously upload fields to MongoDB
-  if (!req.body.password === req.body.repeat_password)
+  if (!(req.body.password === req.body.repeat_password))
     return res
       .status(400)
       .send(
         'The "password" value does not match the given "repeat_password" value'
       );
+
   user = new User(_.pick(req.body, ['name', 'email', 'password']));
   // hashing password
   const salt = await bcrypt.genSalt(10);

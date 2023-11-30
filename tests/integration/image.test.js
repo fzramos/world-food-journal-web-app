@@ -1,41 +1,58 @@
 import request from 'supertest';
 import { google } from 'googleapis';
 import path from 'path';
-import https from 'https';
 import { Restaurant } from '../../server/models/restaurant';
+import { Homemade } from '../../server/models/homemade';
 import mongoose from 'mongoose';
 import { User } from '../../server/models/user';
 import CountryCount from '../../server/models/countryCount';
 import winston from 'winston';
 import _ from 'lodash';
 import { dirname } from 'path';
+import axios from 'axios';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let server;
 
-function checkURL(url) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        // adding 303 since Google Drive typically redirects to diff url for image
-        if (res.statusCode === 200 || res.statusCode === 303) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      })
-      .on('error', (err) => {
-        // Handle HTTPS-specific errors
-        if (err.code === 'ECONNREFUSED') {
-          reject(new Error('Connection refused'));
-        } else if (err.code === 'EHOSTUNREACH') {
-          reject(new Error('Host unreachable'));
-        } else {
-          reject(err);
-        }
+async function checkURL(url) {
+  try {
+    const response = await axios.get(url);
+    return true;
+  } catch (error) {
+    if (error.response.status === 404) {
+      return false;
+    }
+  }
+}
+const credentialsPath = path.resolve(__dirname, '..', '..', 'credentials.json');
+
+const googleAuth = new google.auth.GoogleAuth({
+  scopes: ['https://www.googleapis.com/auth/drive'],
+  keyFile: credentialsPath,
+});
+const drive = google.drive({ version: 'v3', auth: googleAuth });
+
+async function deleteFiles() {
+  let pageToken = '';
+  let files;
+
+  do {
+    const response = await drive.files.list({
+      q: `'${process.env.WFJ_gDriveFolderId}' in parents`,
+      fields: 'nextPageToken, files(id)',
+      pageToken,
+    });
+
+    files = response.data.files;
+    pageToken = response.data.nextPageToken;
+
+    for (const file of files) {
+      await drive.files.delete({
+        fileId: file.id,
       });
-  });
+    }
+  } while (pageToken);
 }
 
 describe('/api/image', () => {
@@ -49,12 +66,6 @@ describe('/api/image', () => {
   let restrId;
   let hmId;
   let otherId;
-  const credentialsPath = path.resolve(
-    __dirname,
-    '..',
-    '..',
-    'credentials.json'
-  );
 
   beforeEach(async () => {
     const { default: myServer } = await import('../../server/server');
@@ -108,35 +119,14 @@ describe('/api/image', () => {
 
     // delete all files in the given Google Drive folder
     // Authenticate with Google Drive
-    const googleAuth = new google.auth.GoogleAuth({
-      scopes: ['https://www.googleapis.com/auth/drive'],
-      keyFile: credentialsPath,
-    });
-    const drive = google.drive({ version: 'v3', auth: googleAuth });
-
-    async function deleteFiles() {
-      let pageToken = '';
-      let files;
-
-      do {
-        const response = await drive.files.list({
-          q: `'${process.env.WFJ_gDriveFolderId}' in parents`,
-          fields: 'nextPageToken, files(id)',
-          pageToken,
-        });
-
-        files = response.data.files;
-        pageToken = response.data.nextPageToken;
-
-        for (const file of files) {
-          await drive.files.delete({
-            fileId: file.id,
-          });
-        }
-      } while (pageToken);
+    try {
+      await deleteFiles();
+    } catch (err) {
+      winston.error(
+        `Attempted to delete Drive image that doesn't exist, it may have already been deleted.`
+      );
+      winston.error(err.errors[0].message);
     }
-
-    await deleteFiles();
   });
   afterAll((done) => {
     mongoose.disconnect();
@@ -236,12 +226,170 @@ describe('/api/image', () => {
       expect(res.status).toBe(400);
       expect(res.text).toMatch(/image/i);
     });
-    // test that multiple imgLinks can be created for Restr doc
-    // test that a non image file wont be uploaded, and will have a descriptive error
-  });
-  // DELETE route
 
-  // test that its actually deleted in drive
-  // test that in restaurant collection list is accurate with deleted image
-  // test that GET /api/restaurant retruns accurate imgLink list
+    it('should return a 404 status if a call is made to a document with a matching docType and docId but with a different userId that within the JWT', async () => {
+      token = new User().generateAuthToken();
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it('should return a 404 status if a call is made with a non-existent docType and docId combination where docType is a valid option', async () => {
+      docType = 'homemade';
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it('should return a 400 status if a call is made with a non-existent docType and docId combination', async () => {
+      docType = 'a';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/docType/i);
+      expect(res.text).toMatch(/invalid/i);
+    });
+  });
+
+  describe('DELETE /:docType/:id/:index', () => {
+    let index;
+    beforeEach(async () => {
+      index = 0;
+      // upload 2 imgLinks to a Restr document
+      for (let i = 0; i < 2; i++) {
+        const res = await request(server)
+          .post(`/api/image/${docType}/${docId.toHexString()}`)
+          .set('x-auth-token', token)
+          .attach('image', 'tests/assets/paella-pic.jpg');
+      }
+    });
+
+    function exec() {
+      return request(server)
+        .delete(`/api/image/${docType}/${docId.toHexString()}/${index}`)
+        .set('x-auth-token', token);
+    }
+
+    it('should return a 401 status if an unauthorized API call is made', async () => {
+      token = '';
+
+      const res = await exec();
+
+      expect(res.status).toBe(401);
+    });
+
+    it('should return a 200 status if a call is made with a valid JWT', async () => {
+      const res = await exec();
+
+      expect(res.status).toBe(200);
+    });
+
+    it('should update the target document so it does not include the specific image link', async () => {
+      const res = await exec();
+      const restr = await Restaurant.findOne({
+        userId: userId,
+        _id: restrId,
+      });
+
+      expect(restr.imgLinks.length).toBeLessThan(2);
+      expect(restr.imgLinks).not.toContain([restr.imgLink]);
+    });
+
+    it('should return a 200 status if a call is made with a valid JWT and index parameter is not set to 0', async () => {
+      index = 1;
+
+      const res = await exec();
+
+      expect(res.status).toBe(200);
+    });
+
+    it('should update the target document so it does not include the specific image link if the index parameter is not set to 0', async () => {
+      index = 1;
+
+      const res = await exec();
+      const restr = await Restaurant.findOne({
+        userId: userId,
+        _id: restrId,
+      });
+
+      expect(restr.imgLinks.length).toBeLessThan(2);
+      expect(restr.imgLinks).not.toContain([restr.imgLink]);
+    });
+
+    it('should return a failing URL if a call is made with a valid JWT', async () => {
+      const res = await exec();
+      let isWorking = false;
+
+      await checkURL(res.body.imgLink);
+
+      expect(isWorking).toBeFalsy();
+    });
+
+    it('should return a 404 status if a call is made with a non-existent docType and docId combination where docType is a valid option', async () => {
+      docType = 'homemade';
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it('should return a 400 status if a call is made with a non-existent docType and docId combination', async () => {
+      docType = 'a';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/docType/i);
+      expect(res.text).toMatch(/invalid/i);
+    });
+
+    it('should return a 400 status if a call is made to a document with a matching docType and docId but with a different userId that within the JWT', async () => {
+      token = new User().generateAuthToken();
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it("should return a 400 status if a call is made with an index parameter larger than the length of the target document's imgLinks array length", async () => {
+      index = 100;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toMatch(/index/i);
+    });
+
+    it("should return a 209 status if a call is made to delete a URL that doesn't exist on the Google Drive", async () => {
+      const restr = await Restaurant.findOne({
+        userId: userId,
+        _id: restrId,
+      });
+      let targetImgLink = restr.imgLinks[0];
+      const urlParts = targetImgLink.split('?');
+      const queryParamsString = urlParts[1];
+      const queryParams = new URLSearchParams(queryParamsString);
+      const id = queryParams.get('id');
+
+      // deleting the file source but not the link in the Restaurant object
+      // simulating some Drive error
+      try {
+        await drive.files.delete({
+          fileId: id,
+        });
+      } catch (err) {
+        winston.error(
+          `Underlying Google Drive image file not found for link ${deletedImgLink}`
+        );
+      }
+
+      const res = await exec();
+
+      expect(res.status).toBe(209);
+      // despite the issues with the underlying URL, we still want to the
+      // route to delete the selected imgLink from the document
+      const updatedRestr = await Restaurant.findOne({
+        userId: userId,
+        _id: restrId,
+      });
+
+      expect(updatedRestr.imgLinks.length).toBeLessThan(2);
+    });
+  });
 });

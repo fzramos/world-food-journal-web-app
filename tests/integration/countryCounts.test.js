@@ -133,11 +133,11 @@ describe('/api/country-counts', () => {
       });
     });
 
-    it('should return a 400 code if an non-existent cntryCd parameter is given', async () => {
+    it('should return a 404 code if an non-existent cntryCd parameter is given', async () => {
       cntryCd = '_';
       const res = await exec();
 
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(404);
     });
 
     it('should return a 401 code if an unauthorized request is made', async () => {

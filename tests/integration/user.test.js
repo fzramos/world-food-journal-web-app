@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import config from 'config';
 import _ from 'lodash';
+import winston from 'winston';
 import { User } from '../../server/models/user.js';
 let server;
 
@@ -211,6 +212,17 @@ describe('/api/user', () => {
 
       expect(res.text).toContain('repeat_password');
       expect(res.text).toContain('required');
+    });
+
+    it('should return a descriptive message if "repeat_password" parameter value does not match "password" value', async () => {
+      userProps.repeat_password = userProps.password + '!';
+      winston.info('password vs repeat_password');
+      winston.info(userProps.password);
+      winston.info(userProps.repeat_password);
+      const res = await exec();
+
+      expect(res.text).toContain('repeat_password');
+      expect(res.text).toContain('match');
     });
 
     it('should return 200 status if a valid request is made', async () => {

@@ -1,17 +1,13 @@
-// const express = require('express');
-// const multer = require('multer');
-// const { google } = require('googleapis');
-// const { MongoClient, ObjectId } = require('mongodb');
-
 import express from 'express';
 const router = express.Router();
 import multer from 'multer';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import winston from 'winston';
 import { google } from 'googleapis';
 import { Restaurant } from '../models/restaurant.js';
 import auth from '../middleware/auth.js';
-// import { Homecook } from '../models/homemade.js';
+import { Homemade } from '../models/homemade.js';
 // import { Other } from '../models/other.js'
 import { env } from 'custom-env';
 env();
@@ -20,6 +16,7 @@ import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import validateImgFile from '../middleware/validateImgFile.js';
+import validateObjectId from '../middleware/validateObjectId.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -45,12 +42,10 @@ const googleAuth = new google.auth.GoogleAuth({
 const drive = google.drive({ version: 'v3', auth: googleAuth });
 
 // Define image upload endpoint
-// id param = Document Id you are uploading the image to
 router.post(
   '/:docType/:id',
   [auth, upload.single('image'), validateImgFile],
   async (req, res) => {
-    // return res.send('wow');
     // Get uploaded image file
     const file = req.file;
 
@@ -76,11 +71,7 @@ router.post(
       // Generate publicly accessible image URL
       const fileUrl = `https://drive.google.com/uc?id=${fileId}`;
 
-      // Save image URL to MongoDB
-      // await imagesCollection.insertOne({ url: fileUrl });
       let doc;
-      // user should only be able to update a document if its associated with their account
-      // (ie the userId in the request's JWT)
       if (req.params.docType.toLowerCase() === 'restaurant') {
         doc = await Restaurant.findOneAndUpdate(
           {
@@ -135,7 +126,6 @@ router.post(
           );
       }
       // Send generated image URL to frontend
-      // res.status(200).json({ url: fileUrl });
       res.json({
         index: doc.imgLinks.length - 1,
         imgLink: fileUrl,
@@ -145,67 +135,103 @@ router.post(
       res.status(500).send('Error uploading image');
     } finally {
       // Delete uploaded image file from temporary storage
-      fs.unlinkSync(file.path);
+      try {
+        await fsPromises.unlink(file.path);
+      } catch (err) {
+        winston.error('Error deleting file from local storage:', err);
+      }
     }
   }
 );
 
-router.delete('/:docType/:id/:index', auth, async (req, res) => {
-  const { id, index } = req.params;
+router.delete(
+  '/:docType/:id/:index',
+  [validateObjectId, auth],
+  async (req, res) => {
+    const { id, index } = req.params;
 
-  // Convert index to a number
-  const indexNum = parseInt(index);
+    // Convert index to a number
+    const indexNum = parseInt(index);
 
-  let doc;
-  // user should only be able to update a document if its associated with their account
-  // (ie the userId in the request's JWT)
-  if (req.params.docType.toLowerCase() === 'restaurant') {
-    doc = await Restaurant.findOne({
-      _id: req.params.id,
-      userId: req.user._id,
+    let doc;
+    // user should only be able to update a document if its associated with their account
+    // (ie the userId in the request's JWT)
+    if (req.params.docType.toLowerCase() === 'restaurant') {
+      doc = await Restaurant.findOne({
+        _id: req.params.id,
+        userId: req.user._id,
+      });
+    } else if (req.params.docType.toLowerCase() === 'homemade') {
+      doc = await Homemade.findOne({
+        _id: req.params.id,
+        userId: req.user._id,
+      });
+    } else if (req.params.docType.toLowerCase() === 'other') {
+      doc = await Other.findOne({
+        _id: req.params.id,
+        userId: req.user._id,
+      });
+    } else {
+      return res
+        .status(400)
+        .send(
+          'docType request parameter is invalid, please use 1 of "restaurant", "homemade", or "other"'
+        );
+    }
+    if (!doc) {
+      return res
+        .status(404)
+        .send(
+          `Could not find document associated with given ObjectId ${req.params.id}. Either user doesn't have access to the document, incorrect document type was given, or the document doesn't exists.`
+        );
+    }
+    // check that given index is within length of imgLinks of doc
+    // Check if the index is valid
+    if (index < 0 || index >= doc.imgLinks.length) {
+      return res.status(400).send('Invalid index');
+    }
+
+    const deletedImgLink = doc.imgLinks[index];
+    // Remove the item from the array at the specified index
+    doc.imgLinks.splice(indexNum, 1);
+
+    // Save the updated document
+    await doc.save();
+
+    // delete the file from Google Drive
+    // Authenticate with Google Drive
+    if (deletedImgLink) {
+      const urlParts = deletedImgLink.split('?');
+      const queryParamsString = urlParts[1];
+      const queryParams = new URLSearchParams(queryParamsString);
+      const id = queryParams.get('id');
+
+      try {
+        await drive.files.delete({
+          fileId: id,
+        });
+      } catch (err) {
+        winston.error(
+          `Underlying Google Drive image file not found for link ${deletedImgLink} despite the URL being stored in MongoDB.`
+        );
+        return res
+          .status(209)
+          .set(
+            'Warning',
+            "imgLink removed from requested document but couldn't delete image from Google Drive, likely because the image doesn't exist anymore."
+          )
+          .json({
+            index: indexNum,
+            imgLink: deletedImgLink,
+          });
+      }
+    }
+
+    res.status(200).json({
+      index: indexNum,
+      imgLink: deletedImgLink,
     });
-  } else if (req.params.docType.toLowerCase() === 'homemade') {
-    doc = await Homemade.findOne({
-      _id: req.params.id,
-      userId: req.user._id,
-    });
-  } else if (req.params.docType.toLowerCase() === 'other') {
-    doc = await Other.findOne({
-      _id: req.params.id,
-      userId: req.user._id,
-    });
-  } else {
-    return res
-      .status(400)
-      .send(
-        'docType request parameter is invalid, please use 1 of "restaurant", "homemade", or "other"'
-      );
   }
-  if (!doc) {
-    return res
-      .status(404)
-      .send(
-        `Could not find document associated with given ObjectId ${req.params.id}. Either user doesn't have access to the document, incorrect document type was given, or the document doesn't exists.`
-      );
-  }
-  // check that given index is within length of imgLinks of doc
-  // Check if the index is valid
-  if (index < 0 || index >= doc.imgLinks.length) {
-    return res.status(400).send('Invalid index');
-  }
-
-  const deletedImgLink = doc.imgLinks[index];
-  // Remove the item from the array at the specified index
-  doc.imgLinks.splice(indexNum, 1);
-
-  // Save the updated document
-  await doc.save();
-
-  res.status(200).send('Doc image deleted successfully');
-
-  /////////////
-  // DELETE URL FROM DRIVE, use image.test.js afterEach but without loop
-  ////////////
-});
+);
 
 export default router;

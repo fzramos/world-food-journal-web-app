@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
     maxAge: 60 * 60 * 24 * 30, // long token age for now
     path: '/',
   });
-  res.setHeader('Set-Header', serialized);
+  res.setHeader('Set-Cookie', serialized);
 
   // valid credentials, send JWT
   res.send(token);

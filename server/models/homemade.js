@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import Joi from 'joi';
 
-const HomecookSchema = new mongoose.Schema({
+const HomemadeSchema = new mongoose.Schema({
   name: {
     type: String,
     minLength: 1,
@@ -49,16 +49,16 @@ const HomecookSchema = new mongoose.Schema({
   },
 });
 
-HomecookSchema.path('link').validate((val) => {
+HomemadeSchema.path('link').validate((val) => {
   urlRegex =
     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
   return urlRegex.test(val);
 }, 'Invalid URL.');
 
-const Homecook = mongoose.model('Homecook', HomecookSchema);
+export const Homemade = mongoose.model('Homemade', HomemadeSchema);
 
 // userId will not be in API call, it will be taken from the JWT of the request
-const validateHomecook = (hm) => {
+const validateHomemade = (hm) => {
   const schema = Joi.object({
     name: Joi.string().min(1).max(200).required(),
     rating: Joi.number().min(0).max(5).required(),
@@ -73,7 +73,7 @@ const validateHomecook = (hm) => {
 };
 
 // difference is nothing will be required since updating each property is optional
-const validateHomecookUpdate = (hm) => {
+const validateHomemadeUpdate = (hm) => {
   const schema = Joi.object({
     name: Joi.string().min(1).max(200),
     rating: Joi.number().min(0).max(5),
@@ -87,8 +87,5 @@ const validateHomecookUpdate = (hm) => {
   return schema.validateAsync(hm);
 };
 
-export {
-  Homecook,
-  validateHomecook as validate,
-  validateHomecookUpdate as validateUpdate,
-};
+export const validate = validateHomemade;
+export const validateUpdate = validateHomemadeUpdate;
