@@ -1,9 +1,6 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import config from 'config';
 import _ from 'lodash';
-import winston from 'winston';
 import { User } from '../../server/models/user.js';
 let server;
 
@@ -12,8 +9,6 @@ describe('/api/user', () => {
   let token;
 
   beforeEach(async () => {
-    // example user register POST request body
-    // reset values after each test
     userProps = {
       name: 'aaa',
       email: 'abc@d.com',
@@ -116,7 +111,6 @@ describe('/api/user', () => {
       const res = await exec();
 
       expect(res.status).toBe(400);
-      // expect(res.text).toContain("name")
     });
 
     it('should return a descriptive message if "name" value is less than 2 characters', async () => {
@@ -134,7 +128,6 @@ describe('/api/user', () => {
       const res = await exec();
 
       expect(res.status).toBe(400);
-      // expect(res.text).toContain("name")
     });
 
     it('should return a descriptive message if "name" value is greater than 100 characters', async () => {
@@ -186,7 +179,7 @@ describe('/api/user', () => {
       const res = await exec();
 
       expect(res.status).toBe(400);
-      // expect(res.text).toContain("name")
+      expect(res.text).toContain('email');
     });
 
     it('should respond with 400 status if no "password" parameter is passed', async () => {
@@ -216,9 +209,7 @@ describe('/api/user', () => {
 
     it('should return a descriptive message if "repeat_password" parameter value does not match "password" value', async () => {
       userProps.repeat_password = userProps.password + '!';
-      winston.info('password vs repeat_password');
-      winston.info(userProps.password);
-      winston.info(userProps.repeat_password);
+
       const res = await exec();
 
       expect(res.text).toContain('repeat_password');

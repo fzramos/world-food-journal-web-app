@@ -90,7 +90,6 @@ describe('/api/country-counts', () => {
     let token;
     let cntryCd;
     let cntryCdObjectId;
-    // let countryCountObjects
 
     beforeEach(async () => {
       userId = user._id;

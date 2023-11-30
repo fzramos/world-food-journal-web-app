@@ -1,8 +1,8 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 import multer from 'multer';
-import fs from 'fs';
-import fsPromises from 'fs/promises';
+import { createReadStream } from 'fs';
+import { unlink } from 'fs/promises';
 import winston from 'winston';
 import { google } from 'googleapis';
 import { Restaurant } from '../models/restaurant.js';
@@ -12,7 +12,7 @@ import { Homemade } from '../models/homemade.js';
 import { env } from 'custom-env';
 env();
 import 'dotenv/config';
-import path from 'path';
+import { resolve as pathResolve } from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import validateImgFile from '../middleware/validateImgFile.js';
@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-const credentialsPath = path.resolve(__dirname, '..', '..', 'credentials.json');
+const credentialsPath = pathResolve(__dirname, '..', '..', 'credentials.json');
 
 // Authenticate with Google Drive
 const googleAuth = new google.auth.GoogleAuth({
@@ -50,7 +50,7 @@ router.post(
     const file = req.file;
 
     // Create a read stream for the image file
-    const readStream = fs.createReadStream(file.path);
+    const readStream = createReadStream(file.path);
 
     // Upload image to Google Drive
     const uploadParams = {
@@ -136,7 +136,7 @@ router.post(
     } finally {
       // Delete uploaded image file from temporary storage
       try {
-        await fsPromises.unlink(file.path);
+        await unlink(file.path);
       } catch (err) {
         winston.error('Error deleting file from local storage:', err);
       }

@@ -22,7 +22,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     minLength: 4,
     maxLength: 255,
-    // unique: true,
   },
   password: {
     type: String,
@@ -75,14 +74,4 @@ const validateUserAsync = async (user) => {
   return schema.validateAsync(user);
 };
 
-// module.exports = {
-//   User: User,
-//   validate: validateUserAsync,
-// };
-
-// export default {
-//   User: User,
-//   validate: validateUserAsync,
-// };
 export const validate = validateUserAsync;
-// export { User: User, validate: validateUserAsync }

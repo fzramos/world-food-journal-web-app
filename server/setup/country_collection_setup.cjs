@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
-const dotenv = require("dotenv")
-dotenv.config()
+const dotenv = require('dotenv');
+dotenv.config();
 const fs = require('fs');
 const mongoUri = process.env.WFJ_mongoUri;
 const jsonFilePath = './server/setup/country_collection_initial.json';
@@ -13,9 +13,9 @@ const readJsonFile = async () => {
 
 const client = new MongoClient(mongoUri);
 
-let data
+let data;
 
-client.connect(async function(err, client) {
+client.connect(async function (err, client) {
   if (err) {
     console.error(err);
     return;
@@ -24,7 +24,7 @@ client.connect(async function(err, client) {
   data = await readJsonFile();
 
   // Connected!
-  console.log('connected')
+  console.log('connected');
 
   // Do your database operations here
   // Perform a simple database operation
@@ -32,17 +32,16 @@ client.connect(async function(err, client) {
   const collection = db.collection('country');
 
   // upload to DB
-  collection.insertMany(data, function(err, result) {
+  collection.insertMany(data, function (err, result) {
     if (err) {
       console.error(err);
       return;
     }
 
     console.log('Successfully inserted data into collection!');
-  })
+  });
 
-  // see results
   const results = await collection.find().toArray();
-  console.log(results)
+  console.log(results);
   client.close();
 });

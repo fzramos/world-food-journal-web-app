@@ -1,11 +1,8 @@
-// import { User } from '../models/user.js';
 import { User } from '../models/user.js';
-import express from 'express';
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 import Joi from 'joi';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import winston from 'winston';
+import { compare } from 'bcrypt';
 import { serialize } from 'cookie';
 
 // check if login request nameOrEmail value is in the format of an email
@@ -34,10 +31,7 @@ router.post('/', async (req, res) => {
     return res.status(400).send(`Username/email and/or password were invalid.`);
 
   // now we need to validate the given password matches the stored encrypted password
-  const matchingPassword = await bcrypt.compare(
-    req.body.password,
-    user.password
-  );
+  const matchingPassword = await compare(req.body.password, user.password);
 
   if (!matchingPassword)
     return res.status(400).send(`Username/email and/or password were invalid.`);
@@ -72,4 +66,3 @@ const validate = async (loginDetails) => {
 };
 
 export default router;
-// login req body validation

@@ -1,11 +1,9 @@
-import express from 'express';
-const router = express.Router();
-import _ from 'lodash';
-import mongoose from 'mongoose';
+import { Router } from 'express';
+const router = Router();
+import { Types } from 'mongoose';
 import CountryCount from '../models/countryCount.js';
 import auth from '../middleware/auth.js';
-import winston from 'winston';
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId = Types.ObjectId;
 
 // only validated users should be able to use this route
 // and they will get all of their country count values (no other users)

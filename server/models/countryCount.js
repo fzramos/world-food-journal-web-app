@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
-import Joi from 'joi';
 
-// TODO: combo of userId and cntryCd should ALWAYS be unique
 const countryCountSchema = new mongoose.Schema({
   cntryCd: {
     type: String,

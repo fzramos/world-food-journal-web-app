@@ -1,13 +1,9 @@
-import jwt from 'jsonwebtoken';
-import config from 'config';
-import bcrypt from 'bcrypt';
+import { genSalt, hash } from 'bcrypt';
 import express from 'express';
-import _ from 'lodash';
+import { pick } from 'lodash';
 const router = express.Router();
-import mongoose from 'mongoose';
 import { User, validate } from '../models/user.js';
 import 'dotenv/config.js';
-import winston from 'winston';
 import auth from '../middleware/auth.js';
 
 router.get('/me', auth, async (req, res) => {
@@ -42,18 +38,16 @@ router.post('/register', async (req, res) => {
         'The "password" value does not match the given "repeat_password" value'
       );
 
-  user = new User(_.pick(req.body, ['name', 'email', 'password']));
+  user = new User(pick(req.body, ['name', 'email', 'password']));
   // hashing password
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(req.body.password, salt);
+  const salt = await genSalt(10);
+  user.password = await hash(req.body.password, salt);
 
   await user.save();
 
   const token = user.generateAuthToken();
 
-  res
-    .header('x-auth-token', token)
-    .send(_.pick(user, ['_id', 'name', 'email']));
+  res.header('x-auth-token', token).send(pick(user, ['_id', 'name', 'email']));
 });
 
 export default router;

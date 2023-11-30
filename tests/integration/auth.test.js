@@ -2,7 +2,6 @@ import request from 'supertest';
 import { User } from '../../server/models/user';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import winston from 'winston';
 let server;
 
 describe('/api/auth', () => {
@@ -31,7 +30,6 @@ describe('/api/auth', () => {
       email = 'abc@c.com';
       password = 'SecurePass1!';
       hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
-      // password = 'SecurePass1!'; // actual password in MongoDB collection will be encrypted
       uploadedUser = new User({
         name,
         email,
