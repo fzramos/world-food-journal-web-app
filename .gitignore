@@ -37,6 +37,7 @@ yarn-error.log*
 .vscode/
 dist/
 weight-sample.txt
+deleted
 
 # Compiled Java class files
 *.class

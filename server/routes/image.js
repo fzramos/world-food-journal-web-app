@@ -5,10 +5,9 @@ import { createReadStream } from 'fs';
 import { unlink } from 'fs/promises';
 import winston from 'winston';
 import { google } from 'googleapis';
-import { Restaurant } from '../models/restaurant.js';
 import auth from '../middleware/auth.js';
-import { Homemade } from '../models/homemade.js';
-// import { Other } from '../models/other.js'
+import validateKind from '../middleware/validateKind.js';
+import pickModel from '../middleware/pickModel.js';
 import { env } from 'custom-env';
 env();
 import 'dotenv/config';
@@ -43,8 +42,8 @@ const drive = google.drive({ version: 'v3', auth: googleAuth });
 
 // Define image upload endpoint
 router.post(
-  '/:docType/:id',
-  [auth, upload.single('image'), validateImgFile],
+  '/kind/:kind/:id',
+  [validateKind, pickModel, auth, upload.single('image'), validateImgFile],
   async (req, res) => {
     // Get uploaded image file
     const file = req.file;
@@ -71,53 +70,19 @@ router.post(
       // Generate publicly accessible image URL
       const fileUrl = `https://drive.google.com/uc?id=${fileId}`;
 
-      let doc;
-      if (req.params.docType.toLowerCase() === 'restaurant') {
-        doc = await Restaurant.findOneAndUpdate(
-          {
-            _id: req.params.id,
-            userId: req.user._id,
-          },
-          {
-            $push: { imgLinks: fileUrl },
-          },
-          {
-            new: true,
-          }
-        );
-      } else if (req.params.docType.toLowerCase() === 'homemade') {
-        doc = await Homemade.findOneAndUpdate(
-          {
-            _id: req.params.id,
-            userId: req.user._id,
-          },
-          {
-            $push: { imgLinks: fileUrl },
-          },
-          {
-            new: true,
-          }
-        );
-      } else if (req.params.docType.toLowerCase() === 'other') {
-        doc = await Other.findOneAndUpdate(
-          {
-            _id: req.params.id,
-            userId: req.user._id,
-          },
-          {
-            $push: { imgLinks: fileUrl },
-          },
-          {
-            new: true,
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .send(
-            'docType request parameter is invalid, please use 1 of "restaurant", "homemade", or "other"'
-          );
-      }
+      let doc = await req.MealKindModel.findOneAndUpdate(
+        {
+          _id: req.params.id,
+          userId: req.user._id,
+        },
+        {
+          $push: { imgLinks: fileUrl },
+        },
+        {
+          new: true,
+        }
+      );
+
       if (!doc) {
         return res
           .status(404)
@@ -145,39 +110,19 @@ router.post(
 );
 
 router.delete(
-  '/:docType/:id/:index',
-  [validateObjectId, auth],
+  '/kind/:kind/:id/:index',
+  [validateKind, pickModel, validateObjectId, auth],
   async (req, res) => {
     const { id, index } = req.params;
 
     // Convert index to a number
     const indexNum = parseInt(index);
 
-    let doc;
-    // user should only be able to update a document if its associated with their account
-    // (ie the userId in the request's JWT)
-    if (req.params.docType.toLowerCase() === 'restaurant') {
-      doc = await Restaurant.findOne({
-        _id: req.params.id,
-        userId: req.user._id,
-      });
-    } else if (req.params.docType.toLowerCase() === 'homemade') {
-      doc = await Homemade.findOne({
-        _id: req.params.id,
-        userId: req.user._id,
-      });
-    } else if (req.params.docType.toLowerCase() === 'other') {
-      doc = await Other.findOne({
-        _id: req.params.id,
-        userId: req.user._id,
-      });
-    } else {
-      return res
-        .status(400)
-        .send(
-          'docType request parameter is invalid, please use 1 of "restaurant", "homemade", or "other"'
-        );
-    }
+    let doc = await req.MealKindModel.findOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
     if (!doc) {
       return res
         .status(404)

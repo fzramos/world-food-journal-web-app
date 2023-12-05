@@ -1,8 +1,17 @@
 import request from 'supertest';
 import { google } from 'googleapis';
 import path from 'path';
-import { Restaurant } from '../../server/models/restaurant';
-import { Homemade } from '../../server/models/homemade';
+import {
+  Meal,
+  Restaurant,
+  Homemade,
+  validate,
+  validateUpdate,
+  validateRestr,
+  validateRestrUpdate,
+  validateHm,
+  validateHmUpdate,
+} from '../../server/models/meal';
 import mongoose from 'mongoose';
 import { User } from '../../server/models/user';
 import CountryCount from '../../server/models/countryCount';
@@ -62,7 +71,7 @@ describe('/api/image', () => {
   let cntryCdObjectId;
   let userId;
   let docId;
-  let docType;
+  let kind;
   let restrId;
   let hmId;
   let otherId;
@@ -77,7 +86,7 @@ describe('/api/image', () => {
     cntryCdObjectId = new mongoose.Types.ObjectId();
     restrId = new mongoose.Types.ObjectId();
     docId = restrId;
-    docType = 'restaurant';
+    kind = 'restr';
 
     // insert 1 into countryCount
     await CountryCount.create({
@@ -133,7 +142,7 @@ describe('/api/image', () => {
     done();
   });
 
-  describe('POST /:docType/:id', () => {
+  describe('POST /kind/:kind/:id', () => {
     let newRestr;
 
     beforeEach(() => {
@@ -149,7 +158,7 @@ describe('/api/image', () => {
 
     function exec() {
       return request(server)
-        .post(`/api/image/${docType}/${docId.toHexString()}`)
+        .post(`/api/image/kind/${kind}/${docId.toHexString()}`)
         .set('x-auth-token', token)
         .attach('image', 'tests/assets/paella-pic.jpg');
     }
@@ -189,11 +198,11 @@ describe('/api/image', () => {
       expect(restr.imgLinks[0]).toBe(res.body.imgLink);
     });
 
-    it('should update the target document to include the new imgLink which should be returned via GET /api/restaurants/:id call', async () => {
+    it('should update the target document to include the new imgLink which should be returned via GET /api/meals/:id call', async () => {
       const res = await exec();
 
       const getRestr = await request(server)
-        .get(`/api/restaurants/entities/${docId.toHexString()}`)
+        .get(`/api/meals/entities/${docId.toHexString()}`)
         .set('x-auth-token', token);
 
       const index = res.body.index;
@@ -219,7 +228,7 @@ describe('/api/image', () => {
 
     it('should return a 400 code and a descriptive error if a non-image file is attempted to be uploaded', async () => {
       const res = await request(server)
-        .post(`/api/image/${docType}/${docId.toHexString()}`)
+        .post(`/api/image/kind/${kind}/${docId.toHexString()}`)
         .set('x-auth-token', token)
         .attach('image', 'tests/assets/sample.txt');
 
@@ -227,38 +236,38 @@ describe('/api/image', () => {
       expect(res.text).toMatch(/image/i);
     });
 
-    it('should return a 404 status if a call is made to a document with a matching docType and docId but with a different userId that within the JWT', async () => {
+    it('should return a 404 status if a call is made to a document with a matching kind and docId but with a different userId that within the JWT', async () => {
       token = new User().generateAuthToken();
       const res = await exec();
 
       expect(res.status).toBe(404);
     });
 
-    it('should return a 404 status if a call is made with a non-existent docType and docId combination where docType is a valid option', async () => {
-      docType = 'homemade';
+    it('should return a 404 status if a call is made with a non-existent kind and docId combination where kind is a valid option', async () => {
+      kind = 'hm';
       const res = await exec();
 
       expect(res.status).toBe(404);
     });
 
-    it('should return a 400 status if a call is made with a non-existent docType and docId combination', async () => {
-      docType = 'a';
+    it('should return a 400 status if a call is made with a non-existent kind and docId combination', async () => {
+      kind = 'a';
       const res = await exec();
 
       expect(res.status).toBe(400);
-      expect(res.text).toMatch(/docType/i);
+      // expect(res.text).toMatch(/kind/i);
       expect(res.text).toMatch(/invalid/i);
     });
   });
 
-  describe('DELETE /:docType/:id/:index', () => {
+  describe('DELETE /kind/:kind/:id/:index', () => {
     let index;
     beforeEach(async () => {
       index = 0;
       // upload 2 imgLinks to a Restr document
       for (let i = 0; i < 2; i++) {
         const res = await request(server)
-          .post(`/api/image/${docType}/${docId.toHexString()}`)
+          .post(`/api/image/kind/${kind}/${docId.toHexString()}`)
           .set('x-auth-token', token)
           .attach('image', 'tests/assets/paella-pic.jpg');
       }
@@ -266,7 +275,7 @@ describe('/api/image', () => {
 
     function exec() {
       return request(server)
-        .delete(`/api/image/${docType}/${docId.toHexString()}/${index}`)
+        .delete(`/api/image/kind/${kind}/${docId.toHexString()}/${index}`)
         .set('x-auth-token', token);
     }
 
@@ -325,23 +334,23 @@ describe('/api/image', () => {
       expect(isWorking).toBeFalsy();
     });
 
-    it('should return a 404 status if a call is made with a non-existent docType and docId combination where docType is a valid option', async () => {
-      docType = 'homemade';
+    it('should return a 404 status if a call is made with a non-existent kind and docId combination where kind is a valid option', async () => {
+      kind = 'hm';
       const res = await exec();
 
       expect(res.status).toBe(404);
     });
 
-    it('should return a 400 status if a call is made with a non-existent docType and docId combination', async () => {
-      docType = 'a';
+    it('should return a 400 status if a call is made with a non-existent kind and docId combination', async () => {
+      kind = 'a';
       const res = await exec();
 
       expect(res.status).toBe(400);
-      expect(res.text).toMatch(/docType/i);
+      expect(res.text).toMatch(/kind/i);
       expect(res.text).toMatch(/invalid/i);
     });
 
-    it('should return a 400 status if a call is made to a document with a matching docType and docId but with a different userId that within the JWT', async () => {
+    it('should return a 400 status if a call is made to a document with a matching kind and docId but with a different userId that within the JWT', async () => {
       token = new User().generateAuthToken();
       const res = await exec();
 

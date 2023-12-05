@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import winston from 'winston';
 import bodyParser from 'body-parser';
-import restaurants from '../routes/restaurants.js';
+import meals from '../routes/meals.js';
 import countryCounts from '../routes/countryCounts.js';
 import users from '../routes/user.js';
 import auth from '../routes/auth.js';
@@ -23,7 +23,7 @@ export default function (app) {
     winston.info('Morgan activated');
   }
 
-  app.use('/api/restaurants', restaurants);
+  app.use('/api/meals', meals);
   app.use('/api/country-counts', countryCounts);
   app.use('/api/user', users);
   app.use('/api/auth', auth);
