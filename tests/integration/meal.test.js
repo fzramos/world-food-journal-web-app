@@ -1,6 +1,5 @@
 import request from 'supertest';
-// import { Restaurant } from '../../server/models/restaurant';
-import { Meal, Restaurant, Homemade } from '../../server/models/meal';
+import { Meal, Restaurant, Homemade, Other } from '../../server/models/meal';
 import mongoose from 'mongoose';
 import { User } from '../../server/models/user';
 import CountryCount from '../../server/models/countryCount';
@@ -18,12 +17,9 @@ describe('/api/meals', () => {
   let restrId;
   let mealId;
   let hmId;
+  let otherId;
   let difficulty;
   let link;
-  // let date7dAgo;
-  // let date6dAgo;
-  // let dateOnedAgo;
-  // let currentDate;
   let currentDate = new Date();
   let dateOnedAgo = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
   dateOnedAgo.setUTCHours(0, 0, 0, 0);
@@ -44,6 +40,7 @@ describe('/api/meals', () => {
     restrId = new mongoose.Types.ObjectId();
     mealId = restrId;
     hmId = new mongoose.Types.ObjectId();
+    otherId = new mongoose.Types.ObjectId();
     link = 'http://www.example.com/yes';
     difficulty = 3;
 
@@ -54,7 +51,7 @@ describe('/api/meals', () => {
       userId: userId,
       restr: 2,
       hm: 1,
-      misc: 1,
+      other: 1,
       wishlist: 1,
     });
 
@@ -706,7 +703,6 @@ describe('/api/meals', () => {
       expect(res.body).toHaveLength(2);
       expect(res.body[0].kind).toBe(kind);
       expect(res.body[1].kind).toBe(kind);
-      // expect(res.body[2].cntryCd).toBe(cntryCd);
     });
 
     it('should return all documents in the Meal collection matching the another kind parameter and JWT userId', async () => {
@@ -805,6 +801,7 @@ describe('/api/meals', () => {
 
       expect(oldCountryCount.restr - 1).toBe(updatedCountryCount.restr);
       expect(oldCountryCount.hm).toBe(updatedCountryCount.hm);
+      expect(oldCountryCount.other).toBe(updatedCountryCount.other);
     });
 
     it('should update the relevant CountryCount document to have its "hm" property value decremented by 1 if the kind is "hm" and the doc\'s wishlist property was false', async () => {
@@ -828,6 +825,45 @@ describe('/api/meals', () => {
       });
 
       expect(oldCountryCount.hm - 1).toBe(updatedCountryCount.hm);
+      expect(oldCountryCount.restr).toBe(updatedCountryCount.restr);
+      expect(oldCountryCount.other).toBe(updatedCountryCount.other);
+    });
+
+    it('should update the relevant CountryCount document to have its "other" property value decremented by 1 if the kind is "other" and the doc\'s wishlist property was false', async () => {
+      kind = 'other';
+      await Other.create({
+        _id: otherId,
+        name: 'A',
+        userId,
+        kind,
+        rating: 3,
+        cntryCd,
+        note: 'Decent',
+        wishlist: true,
+      });
+
+      await Meal.findByIdAndUpdate(
+        otherId,
+        {
+          $set: { wishlist: false },
+        },
+        {}
+      );
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      mealId = otherId;
+      await exec();
+
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.other - 1).toBe(updatedCountryCount.other);
+      expect(oldCountryCount.hm).toBe(updatedCountryCount.hm);
       expect(oldCountryCount.restr).toBe(updatedCountryCount.restr);
     });
 
@@ -859,6 +895,7 @@ describe('/api/meals', () => {
   describe('PUT kind/:kind/entities/:mealId', () => {
     let updatedRestr;
     let updatedHm;
+    let updatedOther;
     let updatedMeal;
 
     beforeEach(() => {
@@ -879,6 +916,13 @@ describe('/api/meals', () => {
         cntryCd: cntryCd,
         note: 'Great',
         difficulty: 5,
+        wishlist: false,
+      };
+      updatedOther = {
+        name: 'Ab',
+        rating: 5,
+        cntryCd: cntryCd,
+        note: 'Great',
         wishlist: false,
       };
     });
@@ -1075,6 +1119,69 @@ describe('/api/meals', () => {
       expect(res.text).toContain('200');
     });
 
+    it('should return a 400 error and descriptive message if a difficulty req.body property is passed with a kind "other"', async () => {
+      kind = 'other';
+      await Other.create({
+        _id: otherId,
+        name: 'A',
+        userId,
+        kind,
+        rating: 3,
+        cntryCd,
+        note: 'Decent',
+        wishlist: true,
+      });
+
+      updatedOther.difficulty = 3;
+      updatedMeal = updatedOther;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('difficulty');
+      expect(res.text).toContain('allowed');
+    });
+
+    it('should return a 400 error and descriptive message if a link req.body property is passed with a kind "other"', async () => {
+      kind = 'other';
+      await Other.create({
+        _id: otherId,
+        name: 'A',
+        userId,
+        rating: 3,
+        cntryCd,
+        note: 'Decent',
+        wishlist: true,
+      });
+      updatedOther.link = 'http://www.wow.com';
+      updatedMeal = updatedOther;
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('link');
+      expect(res.text).toContain('allowed');
+    });
+
+    it('should return a 400 error and descriptive message if a link req.body property is passed with a kind "other"', async () => {
+      kind = 'other';
+      await Other.create({
+        _id: otherId,
+        name: 'A',
+        userId,
+        rating: 3,
+        cntryCd,
+        note: 'Decent',
+        wishlist: true,
+      });
+      updatedOther.location = 'Chicago, IL';
+      updatedMeal = updatedOther;
+      kind = 'other';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('location');
+      expect(res.text).toContain('allowed');
+    });
+
     it('should return a 400 error and descriptive message if the difficulty req.body property value is less than 0', async () => {
       updatedHm.difficulty = -1;
       updatedMeal = updatedHm;
@@ -1174,6 +1281,36 @@ describe('/api/meals', () => {
       expect(oldCountryCount.wishlist - 1).toBe(updatedCountryCount.wishlist);
     });
 
+    it('should update the relevant CountryCount document to have a "other" property value increment by 1 and "wishlist" property decrement by 1 if the req body changes the wishlist value to false from true for a kind other doc', async () => {
+      kind = 'other';
+      await Other.create({
+        _id: otherId,
+        name: 'A',
+        userId,
+        rating: 3,
+        cntryCd,
+        note: 'Decent',
+        wishlist: true,
+      });
+      mealId = otherId;
+      // updatedMeal = updatedHm;
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      updatedMeal = { wishlist: false };
+
+      const res = await exec();
+
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.other + 1).toBe(updatedCountryCount.other);
+      expect(oldCountryCount.wishlist - 1).toBe(updatedCountryCount.wishlist);
+    });
+
     it('should update the relevant CountryCount document to have a "restr" property value decrement by 1 and "wishlist" property increment by 1 if the req body changes the wishlist value to true from false of a kind restr doc', async () => {
       // turning wishlist value to false
       await exec();
@@ -1239,12 +1376,48 @@ describe('/api/meals', () => {
       expect(oldCountryCount.hm - 1).toBe(updatedCountryCount.hm);
       expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
     });
+
+    it('should update the relevant CountryCount document to have a "other" property value decrement by 1 and "wishlist" property increment by 1 if the req body changes the wishlist value to true from false of a kind other doc and a rating value is included in the req.body', async () => {
+      kind = 'other';
+      const up = await Other.create({
+        _id: otherId,
+        name: 'A',
+        userId,
+        kind,
+        rating: 3,
+        cntryCd,
+        note: 'Decent',
+        wishlist: true,
+      });
+      mealId = otherId;
+      updatedMeal = updatedOther;
+      await exec();
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+      // turning wishlist value back to true
+      updatedMeal = {
+        wishlist: true,
+        rating: 4,
+      };
+
+      await exec();
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.other - 1).toBe(updatedCountryCount.other);
+      expect(oldCountryCount.wishlist + 1).toBe(updatedCountryCount.wishlist);
+    });
   });
 
   describe('POST /kind/:kind', () => {
     let newRestr;
     let newHm;
     let newMeal;
+    let newOther;
 
     beforeEach(() => {
       newRestr = {
@@ -1264,6 +1437,14 @@ describe('/api/meals', () => {
         note: 'Great',
         difficulty: 4,
         link: 'http://wow.com',
+        wishlist: false,
+      };
+      newOther = {
+        name: 'ABC',
+        rating: 5,
+        cntryCd,
+        date: date7dAgo,
+        note: 'Great',
         wishlist: false,
       };
       newMeal = newRestr;
@@ -1326,7 +1507,7 @@ describe('/api/meals', () => {
       expect(result).toMatchObject(_.omit(newMeal, ['date']));
     });
 
-    it('should return the created document from the Meal collection', async () => {
+    it('should return the created document from the Meal collection if the kind is "hm"', async () => {
       newMeal = newHm;
       kind = 'hm';
       const res = await exec();
@@ -1334,6 +1515,24 @@ describe('/api/meals', () => {
       expect(res.body).toHaveProperty('_id');
       expect(res.body).toMatchObject(
         _.pick(newHm, [
+          'cntryCd',
+          'location',
+          'name',
+          'note',
+          'rating',
+          'wishlist',
+        ])
+      );
+    });
+
+    it('should return the created document from the Meal collection if the kind is "other"', async () => {
+      newMeal = newOther;
+      kind = 'other';
+      const res = await exec();
+
+      expect(res.body).toHaveProperty('_id');
+      expect(res.body).toMatchObject(
+        _.pick(newOther, [
           'cntryCd',
           'location',
           'name',
@@ -1485,6 +1684,39 @@ describe('/api/meals', () => {
       expect(res.text).toContain('200');
     });
 
+    it('should return a 400 error and descriptive message if a difficulty req.body property is passed with a kind "other"', async () => {
+      newOther.difficulty = 3;
+      newMeal = newOther;
+      kind = 'other';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('difficulty');
+      expect(res.text).toContain('allowed');
+    });
+
+    it('should return a 400 error and descriptive message if a link req.body property is passed with a kind "other"', async () => {
+      newOther.link = 'http://www.wow.com';
+      newMeal = newOther;
+      kind = 'other';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('link');
+      expect(res.text).toContain('allowed');
+    });
+
+    it('should return a 400 error and descriptive message if a link req.body property is passed with a kind "other"', async () => {
+      newOther.location = 'Chicago, IL';
+      newMeal = newOther;
+      kind = 'other';
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+      expect(res.text).toContain('location');
+      expect(res.text).toContain('allowed');
+    });
+
     it('should return a 400 error and descriptive message if the difficulty req.body property value is less than 0', async () => {
       newHm.difficulty = -1;
       newMeal = newHm;
@@ -1560,6 +1792,25 @@ describe('/api/meals', () => {
       });
 
       expect(oldCountryCount.hm + 1).toBe(updatedCountryCount.hm);
+    });
+
+    it('should update the relevant CountryCount document to have an "other" property value incremented by 1 if the req body has wishlist: false and kind: other', async () => {
+      const oldCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      kind = 'other';
+      mealId = otherId;
+      newMeal = newOther;
+      await exec();
+
+      const updatedCountryCount = await CountryCount.findOne({
+        userId,
+        cntryCd,
+      });
+
+      expect(oldCountryCount.other + 1).toBe(updatedCountryCount.other);
     });
 
     it('should return a 400 status if req.body contains wishlist: true and a rating property ', async () => {
@@ -1680,6 +1931,27 @@ describe('/api/meals', () => {
 
       expect(createdCountryCount).toBeDefined();
       expect(createdCountryCount.hm).toBe(1);
+      expect(createdCountryCount.wishlist).toBe(0);
+    });
+
+    it('should create a new CountryCount document with a hm value of 1 if no relevant CountryCount document exists for the given userId and cntryCd and the req body has wishlist: false and kind: other', async () => {
+      await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+
+      kind = 'other';
+      mealId = otherId;
+      newMeal = newOther;
+      const res = await exec();
+
+      const createdCountryCount = await CountryCount.findOneAndDelete({
+        userId,
+        cntryCd,
+      });
+
+      expect(createdCountryCount).toBeDefined();
+      expect(createdCountryCount.other).toBe(1);
       expect(createdCountryCount.wishlist).toBe(0);
     });
   });

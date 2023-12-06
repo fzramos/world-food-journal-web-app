@@ -1,6 +1,5 @@
 export default async function (req, res, next) {
-  //   const kind = req.params.kind;
-  const kinds = ['restr', 'hm'];
+  const kinds = ['restr', 'hm', 'other'];
   if (!kinds.includes(req.params.kind)) {
     return res
       .status(400)

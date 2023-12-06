@@ -22,7 +22,7 @@ const countryCountSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  misc: {
+  other: {
     type: Number,
     default: 0,
   },

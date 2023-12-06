@@ -8,6 +8,8 @@ import {
   validateRestrUpdate,
   validateHm,
   validateHmUpdate,
+  validateOther,
+  validateOtherUpdate,
 } from '../models/meal.js';
 import auth from '../middleware/auth.js';
 import validateKind from '../middleware/validateKind.js';
@@ -16,7 +18,6 @@ import validateObjectId from '../middleware/validateObjectId.js';
 import winston from 'winston';
 import { Types, startSession } from 'mongoose';
 import CountryCount from '../models/countryCount.js';
-import { MongoCryptCreateEncryptedCollectionError } from 'mongodb';
 const ObjectId = Types.ObjectId;
 
 function parseDateQuery(dateStr, isEndDt) {
@@ -347,6 +348,9 @@ router.put(
         case 'hm':
           validateFn = validateHmUpdate;
           break;
+        case 'other':
+          validateFn = validateOtherUpdate;
+          break;
         default:
           return res.status(400).send('Invalid type');
       }
@@ -435,6 +439,9 @@ router.post(
           break;
         case 'hm':
           validateFn = validateHm;
+          break;
+        case 'other':
+          validateFn = validateOther;
           break;
         default:
           return res

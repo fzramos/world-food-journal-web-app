@@ -20,7 +20,7 @@ const MealSchema = new Schema(
     kind: {
       type: String,
       required: true,
-      enum: ['hm', 'restr'],
+      enum: ['hm', 'restr', 'other'],
     },
     wishlist: {
       type: Boolean,
@@ -106,6 +106,9 @@ export const Homemade = Meal.discriminator(
   )
 );
 
+// same schema as Meal
+export const Other = Meal.discriminator('other', new Schema({}, options));
+
 export const validateRestr = (restr) => {
   const schema = Joi.object({
     name: Joi.string().min(1).max(200).required(),
@@ -178,8 +181,45 @@ export const validateHmUpdate = (hm) => {
     note: Joi.string().max(20000),
     difficulty: Joi.number().min(0).max(5),
     wishlist: Joi.boolean(),
-    favorite: Joi.boolean().default(false),
+    favorite: Joi.boolean(),
   });
 
   return schema.validateAsync(hm);
+};
+
+export const validateOther = (other) => {
+  const schema = Joi.object({
+    name: Joi.string().min(1).max(200).required(),
+    rating: Joi.number().min(0).max(5).when('wishlist', {
+      is: false,
+      then: Joi.required(),
+      otherwise: Joi.forbidden(),
+    }),
+    date: Joi.date(),
+    cntryCd: Joi.string().min(1).max(5).required(),
+    note: Joi.string().max(20000),
+    wishlist: Joi.boolean().default(false),
+    favorite: Joi.boolean().default(false),
+  });
+
+  return schema.validateAsync(other);
+};
+
+export const validateOtherUpdate = (other) => {
+  const schema = Joi.object({
+    name: Joi.string().min(1).max(200),
+    rating: Joi.number().min(0).max(5).when('wishlist', {
+      is: true,
+      then: Joi.required(),
+      otherwise: Joi.optional(),
+    }),
+    kind: Joi.string().valid('other'),
+    date: Joi.date(),
+    cntryCd: Joi.string().min(1).max(5),
+    note: Joi.string().max(20000),
+    wishlist: Joi.boolean(),
+    favorite: Joi.boolean(),
+  });
+
+  return schema.validateAsync(other);
 };
