@@ -1,4 +1,4 @@
-import fs, { promises as fsPromises } from 'fs';
+import { existsSync } from 'fs';
 
 export default async function () {
   const env_variables = new Set(['WFJ_jwtPrivateKey', 'WFJ_mongoUri']);
@@ -11,7 +11,7 @@ export default async function () {
     }
   });
 
-  if (!fs.existsSync('credentials.json')) {
+  if (!existsSync('credentials.json')) {
     throw new Error(
       'FATAL ERROR: Required file "credentials.json" file not found. Please set this file before running the application again'
     );

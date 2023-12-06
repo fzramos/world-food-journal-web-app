@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
-import config from 'config';
-import _ from 'lodash';
+// import { get } from 'lodash';
+import { get } from 'lodash-es';
 
 export default function (req, res, next) {
   let token = req.header('x-auth-token');
   // React client will not use x-auth-token since storing that in local storage would be a security risk
   // React client will use HTTPS only cookie for authentication
   // if no x-auth-token is in header, then we'll check if request has HTTPS only cookie
-  if (!token) token = _.get(req.cookies, 'token');
+  if (!token) token = get(req.cookies, 'token');
   if (!token) return res.status(401).send('Access denied. No token provided.');
   try {
     const decoded = jwt.verify(token, process.env.WFJ_jwtPrivateKey);

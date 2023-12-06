@@ -1,4 +1,4 @@
-import { Meal, Restaurant, Homemade, Other } from '../models/meal.js';
+import { Restaurant, Homemade, Other } from '../models/meal.js';
 
 export default async function (req, res, next) {
   const kind = req.params.kind;

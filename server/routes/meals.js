@@ -1,6 +1,6 @@
 import { Router } from 'express';
-// import { setWith, merge, pick, omit } from 'lodash-es';
-import { setWith, merge, pick, omit } from 'lodash';
+import { setWith, merge, pick, omit } from 'lodash-es';
+// import { setWith, merge, pick, omit } from 'lodash';
 const router = Router();
 import {
   Meal,

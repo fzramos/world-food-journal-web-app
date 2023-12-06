@@ -1,15 +1,13 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import Joi from 'joi';
 import { joiPasswordExtendCore } from 'joi-password';
 const joiPassword = Joi.extend(joiPasswordExtendCore);
 import jwt from 'jsonwebtoken';
-import config from 'config';
-import winston from 'winston';
 import { env } from 'custom-env';
 env();
 import 'dotenv/config';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     minLength: 2,
@@ -45,7 +43,7 @@ userSchema.methods.generateAuthToken = function () {
   );
 };
 
-export const User = mongoose.model('User', userSchema);
+export const User = model('User', userSchema);
 
 // Joi purpose is to make sure API users get a clear error message if they
 // try to post faulty data, similar but not identical to the Mongoose schema

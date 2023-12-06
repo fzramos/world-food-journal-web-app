@@ -1,7 +1,8 @@
 import { genSalt, hash } from 'bcrypt';
-import express from 'express';
-import { pick } from 'lodash';
-const router = express.Router();
+import { Router } from 'express';
+import { pick } from 'lodash-es';
+// import { pick } from 'lodash';
+const router = Router();
 import { User, validate } from '../models/user.js';
 import 'dotenv/config.js';
 import auth from '../middleware/auth.js';
