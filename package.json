@@ -8,6 +8,7 @@
     "server": "cross-env NODE_ENV=development node server/server.js",
     "start:server_dev": "cross-env NODE_ENV=development DEBUG=app:* nodemon server/app.js",
     "client": "cd client && npm run dev",
+    "startboth": "BROWSER='firefox developer edition' npm run server & npm run client",
     "test": "jest --runInBand"
   },
   "repository": {
