@@ -1,4 +1,5 @@
 import WorldMap from './components/WorldMap';
+import WorldHeatMap from './components/WorldHeatMap';
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './App.css';
@@ -11,7 +12,8 @@ function App() {
       <div className="card">
         <p>🥐🍕🍜</p>{' '}
       </div>
-      <WorldMap></WorldMap>
+      {/* <WorldMap></WorldMap> */}
+      <WorldHeatMap />
     </>
   );
 }
